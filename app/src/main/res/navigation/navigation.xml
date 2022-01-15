@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/firebaseGoogleLoginJavaFragment">
+
+    <fragment
+        android:id="@+id/fragment_main"
+        android:name="com.example.finalprojectexpensemanager.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_fragment_main_to_fragment_add_expense"
+            app:destination="@id/fragment_add_expense"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_fragment_main_to_fragment_category_page"
+            app:destination="@id/fragment_category_page" />
+        <action
+            android:id="@+id/action_fragment_main_to_fragmentViewAllExpense"
+            app:destination="@id/fragmentViewAllExpense" />
+        <action
+            android:id="@+id/action_fragment_main_to_savedProfileFragment"
+            app:destination="@id/savedProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_add_expense"
+        android:name="com.example.finalprojectexpensemanager.MyAddExpFragment"
+        android:label="fragment_Add_New_Exp"
+        tools:layout="@layout/fragment_add_expense">
+        <argument
+            android:name="id"
+            android:defaultValue="0L"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_fragment_add_expense_to_fragment_main"
+            app:destination="@id/fragment_main" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.finalprojectexpensemanager.LoginAndSaved.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_fragment_main"
+            app:destination="@id/fragment_main" />
+    </fragment>
+    <fragment
+        android:id="@+id/savedProfileFragment"
+        android:name="com.example.finalprojectexpensemanager.LoginAndSaved.SavedProfileFragment"
+        android:label="fragment_saved_profile"
+        tools:layout="@layout/fragment_saved_profile">
+        <action
+            android:id="@+id/action_savedProfileFragment_to_fragment_main"
+            app:destination="@id/fragment_main"
+            app:popUpTo="@id/fragment_main"/>
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentViewAllExpense"
+        android:name="com.example.finalprojectexpensemanager.ViewAllExpenseFragment"
+        android:label="fragment_view_all_expense"
+        tools:layout="@layout/fragment_view_all_expense">
+        <action
+            android:id="@+id/action_fragmentViewAllExpense_to_fragment_main"
+            app:destination="@id/fragment_main" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentMyCategotyDetalis"
+        android:name="com.example.finalprojectexpensemanager.MyCategoryDetalis"
+        android:label="fragment_category_details"
+        tools:layout="@layout/fragment_category_details">
+        <action
+            android:id="@+id/action_fragmentMyCategotyDetalis_to_fragment_category_page"
+            app:destination="@id/fragment_category_page" />
+        <action
+            android:id="@+id/action_fragmentMyCategotyDetalis_to_fragment_main"
+            app:destination="@id/fragment_main" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_category_page"
+        android:name="com.example.finalprojectexpensemanager.CategoryPage"
+        android:label="fragment_category_page"
+        tools:layout="@layout/fragment_category_page"
+        >
+
+
+        <action
+            android:id="@+id/action_fragment_category_page_to_fragmentMyCategotyDetalis"
+            app:destination="@id/fragmentMyCategotyDetalis" />
+        <action
+            android:id="@+id/action_fragment_category_page_to_fragment_main"
+            app:destination="@id/fragment_main" />
+    </fragment>
+    <fragment
+        android:id="@+id/firebaseLoginJavaFragment"
+        android:name="com.example.finalprojectexpensemanager.Login.FirebaseLoginFragmentJava"
+        android:label="fragment_firebase_login"
+        tools:layout="@layout/fragment_firebase_login">
+        <action
+            android:id="@+id/action_firebaseLoginJavaFragment_to_loginJavaFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment" />
+        <action
+            android:id="@+id/action_firebaseLoginJavaFragment_to_firebaseRegisterJavaFragment"
+            app:destination="@id/firebaseRegisterFragment" />
+        <action
+            android:id="@+id/action_firebaseLoginJavaFragment_to_fragment_main"
+            app:destination="@id/fragment_main" />
+    </fragment>
+    <fragment
+        android:id="@+id/firebaseRegisterFragment"
+        android:name="com.example.finalprojectexpensemanager.Login.FirebaseRegisterFragmentJava"
+        android:label="fragment_firebase_register"
+        tools:layout="@layout/fragment_firebase_register">
+
+        <action
+            android:id="@+id/action_firebaseRegisterFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment" />
+        <action
+            android:id="@+id/action_firebaseRegisterFragment_to_firebaseLoginJavaFragment"
+            app:destination="@id/firebaseLoginJavaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/firebaseGoogleLoginJavaFragment"
+        android:name="com.example.finalprojectexpensemanager.Login.FirebaseGoogleLoginFragmentJava"
+        android:label="fragment_firebase_google_login"
+        tools:layout="@layout/fragment_firebase_google_login">
+        <action
+            android:id="@+id/action_firebaseGoogleLoginJavaFragment_to_firebaseLoginFragment"
+            app:destination="@id/firebaseLoginJavaFragment" />
+        <action
+            android:id="@+id/action_firebaseGoogleLoginJavaFragment_to_fragmentMain"
+            app:destination="@id/fragment_main" />
+        <action
+            android:id="@+id/action_firebaseGoogleLoginJavaFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+
+    </fragment>
+</navigation>
+

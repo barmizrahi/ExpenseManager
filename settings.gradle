@@ -1,0 +1,3 @@
+
+rootProject.name = "finalProjectExpenseManager"
+include ':app'
