@@ -37,7 +37,6 @@ public class ExpenseRepository {
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //LiveData<List<ExpenseTable>> ExpenseTable = new ArrayList<>();
                 for (DataSnapshot child : snapshot.getChildren()) {
                     if (child.getKey().equals(userName)) {//then enter to the user now
                         for (DataSnapshot child1 : child.getChildren()) {//expneses
@@ -57,48 +56,13 @@ public class ExpenseRepository {
             }
 
         });
-        // ExpenseDatabase expenseDatabase = ExpenseDatabase.getInstance(application);
-        //expenseDao = expenseDatabase.expenseDao();
+
     }
 
     private void myswichCase(DataSnapshot child2, String key) {
         for (DataSnapshot child3 : child2.getChildren()) {//items of type
             insertExpensesIntoList(key, child3);
         }
-        /*
-        switch (key) {
-            case "Food":
-                for (DataSnapshot child3 : child2.getChildren()) {//items of type
-                    insertExpensesIntoList(key, child3);
-                }
-                break;
-            case "Travel":
-                for (DataSnapshot child3 : child2.getChildren()) {//items of type
-                    insertExpensesIntoList(key, child3);
-                }
-                break;
-            case "Utilities":
-                for (DataSnapshot child3 : child2.getChildren()) {//items of type
-                    insertExpensesIntoList(key, child3);
-                }
-                break;
-            case "Health":
-                for (DataSnapshot child3 : child2.getChildren()) {//items of type
-                    insertExpensesIntoList(key, child3);
-                }
-                break;
-            case "Shopping":
-                for (DataSnapshot child3 : child2.getChildren()) {//items of type
-                    insertExpensesIntoList(key, child3);
-                }
-                break;
-            case "Others":
-                for (DataSnapshot child3 : child2.getChildren()) {//items of type
-                    insertExpensesIntoList(key, child3);
-                }
-        }
-
-         */
     }
 
     private void insertExpensesIntoList(String key, DataSnapshot child3) {
@@ -155,8 +119,6 @@ public class ExpenseRepository {
     }
 
     public void add(ExpenseTable expense, DatabaseReference myRef) {
-        //FirebaseDatabase database = FirebaseDatabase.getInstance();
-        //DatabaseReference myRef = database.getReference(EXPENSE_TABLE_APP);
         myRef.child(userName).child(EXPENSE_TABLE).child(expense.getCategory()).child("" + counter).setValue(expense);
         myRef.child(userName).child(EXPENSE_TABLE).child(EXPENSES_COUNTER).setValue("" + counter);
 
@@ -223,6 +185,5 @@ public class ExpenseRepository {
         allExpenses.remove(adapterPosition);
         return e;
     }
-
 
 }

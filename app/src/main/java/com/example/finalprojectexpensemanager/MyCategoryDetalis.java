@@ -34,7 +34,7 @@ import com.example.finalprojectexpensemanager.Adapters.AllTransactionAdapter;
 import com.example.finalprojectexpensemanager.Entity.ExpenseTable;
 import com.example.finalprojectexpensemanager.ViewModel.CategoryViewModel;
 
-public class MyCategoryDetalis extends Fragment {
+public class MyCategoryDetalis extends Fragment  {
     private RecyclerView category_view;
     private CategoryViewModel categoryViewModel;
     private float totalSpending = 0;

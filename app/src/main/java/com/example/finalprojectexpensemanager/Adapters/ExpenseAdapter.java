@@ -108,9 +108,6 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseH
         void onItemClick(ExpenseTable expense);
     }
 
-    public void setOnItemClickListner(OnItemClickListner listner) {
-        this.listner = listner;
-    }
 }
 
 

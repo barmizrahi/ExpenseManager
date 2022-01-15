@@ -4,21 +4,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.finalprojectexpensemanager.R;
-
-
 import java.util.ArrayList;
 import java.util.List;
 
 import com.example.finalprojectexpensemanager.Entity.ExpenseTable;
 
 public class AllTransactionAdapter extends RecyclerView.Adapter<AllTransactionAdapter.ExpenseHolder> {
-    private List<ExpenseTable> expenses=new ArrayList<>();
+    private List<ExpenseTable> expenses = new ArrayList<>();
     ExpenseAdapter.OnItemClickListner listner;
+
     @NonNull
     @Override
     public ExpenseHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -41,39 +38,37 @@ public class AllTransactionAdapter extends RecyclerView.Adapter<AllTransactionAd
         this.expenses = expenses;
         notifyDataSetChanged();
     }
-    public ExpenseTable getPos(int position){
+
+    public ExpenseTable getPos(int position) {
         return expenses.get(position);
     }
+
     @Override
     public int getItemCount() {
         return expenses.size();
     }
 
-    class ExpenseHolder extends RecyclerView.ViewHolder{
+    class ExpenseHolder extends RecyclerView.ViewHolder {
         private TextView expenseName;
         private TextView amount;
         private TextView desc;
         private TextView date;
-        public ExpenseHolder(View view){
+
+        public ExpenseHolder(View view) {
             super(view);
-            expenseName=view.findViewById(R.id.expenseName);
-            amount=view.findViewById(R.id.amount);
-            desc=view.findViewById(R.id.desc);
-            date=view.findViewById(R.id.date);
+            expenseName = view.findViewById(R.id.expenseName);
+            amount = view.findViewById(R.id.amount);
+            desc = view.findViewById(R.id.desc);
+            date = view.findViewById(R.id.date);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int position=getAdapterPosition();
-                    if(listner!=null && position!=RecyclerView.NO_POSITION)
+                    int position = getAdapterPosition();
+                    if (listner != null && position != RecyclerView.NO_POSITION)
                         listner.onItemClick(expenses.get(position));
                 }
             });
         }
     }
-    public interface OnItemClickListner{
-        void onItemClick(ExpenseTable expense);
-    }
-    public void setOnItemClickListner(ExpenseAdapter.OnItemClickListner listner){
-        this.listner=listner;
-    }
+
 }

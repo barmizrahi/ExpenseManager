@@ -67,7 +67,7 @@ public class MainFragment extends Fragment {
         Context context = container.getContext();
         view = inflater.inflate(R.layout.fragment_main, container, false);
         activity = this.getActivity();
-        activity.setTitle("");
+        activity.setTitle("Expense Manager");
         FloatingActionButton buttonAddNote = view.findViewById(R.id.button_add_note);
         SharedPreferences sharedPreferences = activity.getSharedPreferences("login", Context.MODE_PRIVATE);
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
