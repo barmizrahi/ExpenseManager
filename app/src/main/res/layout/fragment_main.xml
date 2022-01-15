@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layoutDirection="ltr"
+    android:background="@drawable/bg"
     tools:context="com.example.finalprojectexpensemanager.MainFragment">
 
     <androidx.cardview.widget.CardView
@@ -68,7 +69,7 @@
         android:layout_marginBottom="14dp"
         android:text="Hi, "
         android:textColor="@android:color/black"
-        android:textSize="16sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/cardView1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -79,7 +80,7 @@
         android:layout_height="wrap_content"
         android:text=""
         android:textColor="@android:color/black"
-        android:textSize="16sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView6"
         app:layout_constraintStart_toEndOf="@+id/textView6"
         app:layout_constraintTop_toTopOf="@+id/textView6" />

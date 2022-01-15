@@ -23,13 +23,10 @@
         <action
             android:id="@+id/action_fragment_main_to_fragmentViewAllExpense"
             app:destination="@id/fragmentViewAllExpense" />
-        <action
-            android:id="@+id/action_fragment_main_to_savedProfileFragment"
-            app:destination="@id/savedProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragment_add_expense"
-        android:name="com.example.finalprojectexpensemanager.MyAddExpFragment"
+        android:name="com.example.finalprojectexpensemanager.AddExpFragment"
         android:label="fragment_Add_New_Exp"
         tools:layout="@layout/fragment_add_expense">
         <argument
@@ -49,16 +46,7 @@
             android:id="@+id/action_loginFragment_to_fragment_main"
             app:destination="@id/fragment_main" />
     </fragment>
-    <fragment
-        android:id="@+id/savedProfileFragment"
-        android:name="com.example.finalprojectexpensemanager.LoginAndSaved.SavedProfileFragment"
-        android:label="fragment_saved_profile"
-        tools:layout="@layout/fragment_saved_profile">
-        <action
-            android:id="@+id/action_savedProfileFragment_to_fragment_main"
-            app:destination="@id/fragment_main"
-            app:popUpTo="@id/fragment_main"/>
-    </fragment>
+
     <fragment
         android:id="@+id/fragmentViewAllExpense"
         android:name="com.example.finalprojectexpensemanager.ViewAllExpenseFragment"

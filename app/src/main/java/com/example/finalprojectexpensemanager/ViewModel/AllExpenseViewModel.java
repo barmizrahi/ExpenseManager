@@ -19,17 +19,9 @@ public class AllExpenseViewModel extends AndroidViewModel {
     public AllExpenseViewModel(@NonNull Application application) {
         super(application);
         expenseRepository = new ExpenseRepository(application);
-        //getAllExpense = expenseRepository.getAllExpense();
         AllExpense = expenseRepository.getAllExpenses();
-    }/*
-    public LiveData<List<ExpenseTable>> getAllExpense(){
-        return getAllExpense;
     }
 
-    public void delete(ExpenseTable expense) {
-        expenseRepository.delete(expense);
-    }
-    */
     public List<ExpenseTable> getAllExpense(){
         AllExpense = ExpenseRepository.getAllExpenses();
         return AllExpense;

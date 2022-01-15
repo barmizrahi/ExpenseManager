@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:layoutDirection="ltr"
-    tools:context="com.example.finalprojectexpensemanager.MyAddExpFragment">
+    tools:context="com.example.finalprojectexpensemanager.AddExpFragment">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,6 +36,7 @@
                 android:layout_height="wrap_content"
                 android:nextFocusDown="@id/amount_input"
                 android:imeOptions="actionNext"
+                android:inputType="textCapWords"
                 android:singleLine="true"
 
                 android:hint="Expense Name" />
@@ -95,10 +96,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Description"
+                android:nextFocusDown="@id/categoryChipGroup"
                 android:singleLine="true"
+                android:inputType="textCapWords"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:nextFocusDown="@id/categoryChipGroup"
                 app:layout_constraintTop_toBottomOf="@+id/amount_input_text" />
         </com.google.android.material.textfield.TextInputLayout>
 

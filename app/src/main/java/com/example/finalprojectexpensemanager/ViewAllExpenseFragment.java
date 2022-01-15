@@ -51,7 +51,7 @@ public class ViewAllExpenseFragment extends Fragment {
     RecyclerView.ViewHolder viewHolder1;
 
 
-     class SortByDate implements Comparator<ExpenseTable> {
+    class SortByDate implements Comparator<ExpenseTable> {
         @Override
         public int compare(ExpenseTable a, ExpenseTable b) {
             return b.getDate().compareTo(a.getDate());
@@ -93,7 +93,7 @@ public class ViewAllExpenseFragment extends Fragment {
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 String helper = snapshot.getValue(String.class).toString();
                                 int newAmount = Integer.parseInt(helper) + Integer.parseInt(e.getAmount());
-                                myRef.child(ExpenseRepository.userName).child(ExpenseRepository.EXPENSE_TABLE).child(LoginFragment.BUDGETDB).setValue(""+newAmount);
+                                myRef.child(ExpenseRepository.userName).child(ExpenseRepository.EXPENSE_TABLE).child(LoginFragment.BUDGETDB).setValue("" + newAmount);
                             }
 
                             @Override
@@ -101,11 +101,6 @@ public class ViewAllExpenseFragment extends Fragment {
 
                             }
                         });
-                        //no_expense.setVisibility(View.VISIBLE);
-                        //recyclerView.setVisibility(View.INVISIBLE);
-                        //deleteAll.setVisibility(View.INVISIBLE);
-                        //transactionText.setVisibility(View.INVISIBLE);
-                        //viewAllTransaction.setVisibility(View.INVISIBLE);
                     }
                 })
                 .setNegativeButton("No Refund", R.drawable.ic_close, new MaterialDialog.OnClickListener() {
@@ -125,8 +120,6 @@ public class ViewAllExpenseFragment extends Fragment {
                 ItemTouchHelper.RIGHT) {
 
 
-
-
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
                 return false;
@@ -137,25 +130,14 @@ public class ViewAllExpenseFragment extends Fragment {
                 viewHolder1 = viewHolder;
                 mDialog.show();
 
+            }
 
-                /*
-                    expenseViewModel.myDelete(viewHolder.getAdapterPosition());
-                    adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
-                    adapter.notifyItemRangeChanged(viewHolder.getAdapterPosition(), ExpenseRepository.allExpenses.size());
-                    viewHolder.itemView.setVisibility(View.GONE);
-
-                 */
-                }
-
-                //Toast.makeText(activity, "Expense removed", Toast.LENGTH_SHORT).show();
 
         }).attachToRecyclerView(expenseView);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                    Navigation.findNavController(view).navigate(R.id.action_fragmentViewAllExpense_to_fragment_main);
-
+                Navigation.findNavController(view).navigate(R.id.action_fragmentViewAllExpense_to_fragment_main);
             }
         });
         return view;

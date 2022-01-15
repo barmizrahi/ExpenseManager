@@ -1,15 +1,11 @@
 package com.example.finalprojectexpensemanager;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
@@ -17,7 +13,6 @@ import androidx.navigation.Navigation;
 public class CategoryPage extends Fragment {
     public static String EXTRA_CATEGORY = "Category";
     CardView food_Cat, travel_cat, utilities_cat, health_cat, shopping_cat, others_cat;
-    private Activity activity;
     Context context;
     private View view;
     private ImageButton categoty_back_btn;
@@ -26,7 +21,6 @@ public class CategoryPage extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         context = container.getContext();
         this.view = inflater.inflate(R.layout.fragment_category_page, container, false);
-        activity = this.getActivity();
         init(view);
         categoty_back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +69,6 @@ public class CategoryPage extends Fragment {
 
 
     private void navigate(String val) {
-        //MyCategoryDetalis myCategoryDetalis = new MyCategoryDetalis();
         Bundle bundle = new Bundle();
         bundle.putString(EXTRA_CATEGORY, val);
         getParentFragmentManager().setFragmentResult("dataFromCatagory", bundle);

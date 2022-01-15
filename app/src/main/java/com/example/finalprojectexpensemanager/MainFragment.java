@@ -55,7 +55,6 @@ public class MainFragment extends Fragment {
     private TextView transactionText;
     private TextView viewAllTransaction;
     private LinearLayoutManager HorizontalLayout;
-    ;
     private Activity activity;
     private TextView amount_remaining2;
     private TextView name_text;
@@ -66,9 +65,9 @@ public class MainFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Context context = container.getContext();
-        // auth = FirebaseAuth.getInstance();
         view = inflater.inflate(R.layout.fragment_main, container, false);
         activity = this.getActivity();
+        activity.setTitle("");
         FloatingActionButton buttonAddNote = view.findViewById(R.id.button_add_note);
         SharedPreferences sharedPreferences = activity.getSharedPreferences("login", Context.MODE_PRIVATE);
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
@@ -98,7 +97,6 @@ public class MainFragment extends Fragment {
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 getkey[0] = result.getString("Amount");
 
-
             }
         });
         final int[] cur = new int[1];
@@ -106,7 +104,7 @@ public class MainFragment extends Fragment {
         myRef.child(ExpenseRepository.userName).child(ExpenseRepository.EXPENSE_TABLE).child(LoginFragment.BUDGETDB).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String helper = snapshot.getValue(String.class).toString();
+                String helper = snapshot.getValue(String.class);
                 cur[0] = Integer.parseInt(helper) -  Integer.parseInt(getkey[0]);
                 myRef.child(ExpenseRepository.userName).child(ExpenseRepository.EXPENSE_TABLE).child(LoginFragment.BUDGETDB).setValue(""+cur[0]);
                 amount_remaining2.setText(""+cur[0]);
@@ -268,9 +266,6 @@ public class MainFragment extends Fragment {
                 expenseViewModel.deleteAllExpense();
                 Toast.makeText(activity, "All expenses deleted", Toast.LENGTH_SHORT).show();
                 return true;
-            case R.id.profile:
-                Navigation.findNavController(view).navigate(R.id.action_fragment_main_to_savedProfileFragment);
-                //need to open the profile framgnet
             default:
                 return super.onOptionsItemSelected(item);
         }

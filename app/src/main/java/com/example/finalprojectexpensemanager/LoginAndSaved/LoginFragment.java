@@ -11,12 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
-
 import com.example.finalprojectexpensemanager.Repository.ExpenseRepository;
 import com.google.android.material.textfield.TextInputLayout;
 import com.example.finalprojectexpensemanager.R;
@@ -81,16 +77,6 @@ public class LoginFragment extends Fragment{
             PersonIncome= view.findViewById(R.id.PersonIncome);
             continueButton = view.findViewById(R.id.continueButton);
             boolean boarded = sharedPreferences.getBoolean("isLogin", false);
-            /*
-            if (boarded) {
-                NavHostFragment.findNavController(LoginFragment.this).navigate(R.id.action_loginFragment_to_fragment_main);
-                //FragmentKt.findNavController(this).navigate(LoginFragmentDirections.actionLoginFragmentToFragmentMain());
-                //FragmentKt.findNavController(this).navigate(LoginFragmentDirections.actionLoginFragmentToFragmentMain());
-            } else {
-                sharedPreferences.edit().putBoolean("isLogin", true);
-            }
-
-             */
 
             return view;
         }
@@ -108,7 +94,6 @@ public class LoginFragment extends Fragment{
                     String income = PersonIncome.getEditText().getText().toString();
                     saveCredentials(name,budget,income);
                     Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_fragment_main);
-                   // FragmentKt.findNavController(LoginFragment.this).navigate(LoginFragmentDirections.actionLoginFragmentToFragmentMain());
                 }
             }));
         }

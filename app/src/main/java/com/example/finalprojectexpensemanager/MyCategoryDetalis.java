@@ -2,7 +2,6 @@ package com.example.finalprojectexpensemanager;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -40,20 +37,17 @@ import com.example.finalprojectexpensemanager.ViewModel.CategoryViewModel;
 public class MyCategoryDetalis extends Fragment {
     private RecyclerView category_view;
     private CategoryViewModel categoryViewModel;
-    private float totalSpending=0;
+    private float totalSpending = 0;
     private TickerView totalSpendingtext;
-    private  TextView categoryTitle;
+    private TextView categoryTitle;
     private ImageButton backbtn;
-    private  Activity activity;
+    private Activity activity;
     final String[] getkey = {""};
     final AllTransactionAdapter adapter = new AllTransactionAdapter();
-    //public void setActivity(AppCompatActivity activity) {
-       // this.activity = activity;
-    //}
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_category_details, container, false);
-        //activity.getSupportActionBar().hide();
         this.activity = getActivity();
         Context context = container.getContext();
         backbtn = view.findViewById(R.id.back);
@@ -68,14 +62,11 @@ public class MyCategoryDetalis extends Fragment {
                 getkey[0] = result.getString(CategoryPage.EXTRA_CATEGORY);
                 int x = 0;
                 Toast.makeText(context, "selected key" + getkey[0], Toast.LENGTH_SHORT).show();
-                //final AllTransactionAdapter adapter = new AllTransactionAdapter();
                 category_view.setAdapter(adapter);
                 categoryViewModel = new ViewModelProvider(requireActivity()).get(CategoryViewModel.class);
-                //assert getkey != null;
                 if (getkey[0] == null) {
                     throw new AssertionError("Object cannot be null");
-                }
-                else
+                } else
                     mySwichCase(getkey[0]);
             }
         });
@@ -93,222 +84,20 @@ public class MyCategoryDetalis extends Fragment {
     private void mySwichCase(String key) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference(ExpenseRepository.EXPENSE_TABLE_APP);
-        List<ExpenseTable> foodExp = new ArrayList<>();
+        List<ExpenseTable> expnsesToShowByCategory = new ArrayList<>();
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //LiveData<List<ExpenseTable>> ExpenseTable = new ArrayList<>();
                 for (DataSnapshot child : snapshot.getChildren()) {//users
                     if (child.getKey().equals(ExpenseRepository.userName)) {//if enter then in the user
                         for (DataSnapshot child1 : child.getChildren()) {//expneses
                             for (DataSnapshot child2 : child1.getChildren()) {
-                                switch (key) {
-                                    case "Food":
-                                        categoryTitle.setText("Food Expenses");
-                                        if (child2.getKey().equals("Food")) {
-                                            for (DataSnapshot child3 : child2.getChildren()) {//items of type
-                                                try {
-                                                    ExpenseTable expenseTable = child3.getValue(ExpenseTable.class);
-                                                    foodExp.add(expenseTable);
-                                                } catch (Exception ex) {
-                                                }
-                                            }
-                                            adapter.setNotes(foodExp);
-                                            for (int i = 0; i < foodExp.size(); i++) {
-                                                totalSpending = totalSpending + Float.parseFloat(foodExp.get(i).getAmount());
-                                            }
-                                            totalSpendingtext.setText("Rs " + totalSpending);
-                                            return;
-                                        }
-                                        break;
-                                    case "Travel":
-                                        categoryTitle.setText("Travel Expenses");
-                                        if (child2.getKey().equals("Travel")) {
-                                            for (DataSnapshot child3 : child2.getChildren()) {//items of type
-                                                try {
-                                                    ExpenseTable expenseTable = child3.getValue(ExpenseTable.class);
-                                                    foodExp.add(expenseTable);
-                                                } catch (Exception ex) {
-                                                }
-                                            }
-                                            adapter.setNotes(foodExp);
-                                            for (int i = 0; i < foodExp.size(); i++) {
-                                                totalSpending = totalSpending + Float.parseFloat(foodExp.get(i).getAmount());
-                                            }
-                                            totalSpendingtext.setText("Rs " + totalSpending);
-                                            return;
-                                        }
-                                    /*
-                                    categoryViewModel.getTravelCategory().observe(getViewLifecycleOwner(), new Observer<List<ExpenseTable>>() {
-                                        @Override
-                                        public void onChanged(List<ExpenseTable> expenseTables) {
-                                            adapter.setNotes(expenseTables);
-                                            for (int i = 0; i < expenseTables.size(); i++) {
-                                                totalSpending = totalSpending + Float.parseFloat(expenseTables.get(i).getAmount());
-                                            }
-                                            totalSpendingtext.setText("Rs " + totalSpending);
-                                        }
-                                    });
-
-                                     */
-                                        break;
-                                    case "Utilities":
-                                        categoryTitle.setText("Utilities Expenses");
-                                        if (child2.getKey().equals("Utilities")) {
-                                            for (DataSnapshot child3 : child2.getChildren()) {//items of type
-                                                try {
-                                                    ExpenseTable expenseTable = child3.getValue(ExpenseTable.class);
-                                                    foodExp.add(expenseTable);
-                                                } catch (Exception ex) {
-                                                }
-                                            }
-                                            adapter.setNotes(foodExp);
-                                            for (int i = 0; i < foodExp.size(); i++) {
-                                                totalSpending = totalSpending + Float.parseFloat(foodExp.get(i).getAmount());
-                                            }
-                                            totalSpendingtext.setText("Rs " + totalSpending);
-                                            return;
-                                        }
-                                    /*
-                                    categoryViewModel.getUtilityCategory().observe(getViewLifecycleOwner(), new Observer<List<ExpenseTable>>() {
-                                        @Override
-                                        public void onChanged(List<ExpenseTable> expenseTables) {
-                                            adapter.setNotes(expenseTables);
-                                            for (int i = 0; i < expenseTables.size(); i++) {
-                                                totalSpending = totalSpending + Float.parseFloat(expenseTables.get(i).getAmount());
-                                            }
-                                            totalSpendingtext.setText("Rs " + totalSpending);
-                                        }
-                                    });
-
-                                     */
-                                        break;
-                                    case "Health":
-                                        categoryTitle.setText("Health Expenses");
-                                        if (child2.getKey().equals("Health")) {
-                                            for (DataSnapshot child3 : child2.getChildren()) {//items of type
-                                                try {
-                                                    ExpenseTable expenseTable = child3.getValue(ExpenseTable.class);
-                                                    foodExp.add(expenseTable);
-                                                } catch (Exception ex) {
-                                                }
-                                            }
-                                            adapter.setNotes(foodExp);
-                                            for (int i = 0; i < foodExp.size(); i++) {
-                                                totalSpending = totalSpending + Float.parseFloat(foodExp.get(i).getAmount());
-                                            }
-                                            totalSpendingtext.setText("Rs " + totalSpending);
-                                            return;
-                                        }
-                                    /*
-                                    categoryViewModel.getHealthCategory().observe(getViewLifecycleOwner(), new Observer<List<ExpenseTable>>() {
-                                        @Override
-                                        public void onChanged(List<ExpenseTable> expenseTables) {
-                                            adapter.setNotes(expenseTables);
-                                            for (int i = 0; i < expenseTables.size(); i++) {
-                                                totalSpending = totalSpending + Float.parseFloat(expenseTables.get(i).getAmount());
-                                            }
-                                            totalSpendingtext.setText("Rs " + totalSpending);
-                                        }
-                                    });
-
-                                     */
-                                        break;
-                                    case "Shopping":
-                                        categoryTitle.setText("Shopping Expenses");
-                                        if (child2.getKey().equals("Shopping")) {
-                                            for (DataSnapshot child3 : child2.getChildren()) {//items of type
-                                                try {
-                                                    ExpenseTable expenseTable = child3.getValue(ExpenseTable.class);
-                                                    foodExp.add(expenseTable);
-                                                } catch (Exception ex) {
-                                                }
-                                            }
-                                            adapter.setNotes(foodExp);
-                                            for (int i = 0; i < foodExp.size(); i++) {
-                                                totalSpending = totalSpending + Float.parseFloat(foodExp.get(i).getAmount());
-                                            }
-                                            totalSpendingtext.setText("Rs " + totalSpending);
-                                            return;
-                                        }
-                                    /*
-                                    categoryViewModel.getShoppingCategory().observe(getViewLifecycleOwner(), new Observer<List<ExpenseTable>>() {
-                                        @Override
-                                        public void onChanged(List<ExpenseTable> expenseTables) {
-                                            adapter.setNotes(expenseTables);
-                                            for (int i = 0; i < expenseTables.size(); i++) {
-                                                totalSpending = totalSpending + Float.parseFloat(expenseTables.get(i).getAmount());
-                                            }
-                                            totalSpendingtext.setText("Rs " + totalSpending);
-                                        }
-                                    });
-
-                                     */
-                                        break;
-                                    case "Others":
-                                        categoryTitle.setText("Others Expenses");
-                                        if (child2.getKey().equals("Others")) {
-                                            for (DataSnapshot child3 : child2.getChildren()) {//items of type
-                                                try {
-                                                    ExpenseTable expenseTable = child3.getValue(ExpenseTable.class);
-                                                    foodExp.add(expenseTable);
-                                                } catch (Exception ex) {
-                                                }
-                                            }
-                                            adapter.setNotes(foodExp);
-                                            for (int i = 0; i < foodExp.size(); i++) {
-                                                totalSpending = totalSpending + Float.parseFloat(foodExp.get(i).getAmount());
-                                            }
-                                            totalSpendingtext.setText("Rs " + totalSpending);
-                                            return;
-                                        }
-                                    /*
-                                    categoryViewModel.getOthersCategory().observe(getViewLifecycleOwner(), new Observer<List<ExpenseTable>>() {
-                                        @Override
-                                        public void onChanged(List<ExpenseTable> expenseTables) {
-                                            adapter.setNotes(expenseTables);
-                                            for (int i = 0; i < expenseTables.size(); i++) {
-                                                totalSpending = totalSpending + Float.parseFloat(expenseTables.get(i).getAmount());
-                                            }
-                                            totalSpendingtext.setText("Rs " + totalSpending);
-                                        }
-                                    });
-
-                                     */
-                                        break;
-                                }
+                                mySwichCase1(child2, key, expnsesToShowByCategory);
                             }
                         }
                     }
                 }
             }
-                                /*
-                                if(child2.getKey().equals("Food")) {
-                                    for (DataSnapshot child3 : child2.getChildren()) {//items of type
-                                        try {
-                                            ExpenseTable expenseTable = child3.getValue(ExpenseTable.class);
-                                            foodExp.add(expenseTable);
-                                        } catch (Exception ex) {
-                                        }
-                                    }
-                                    adapter.setNotes(foodExp);
-                                    for (int i = 0; i < foodExp.size(); i++) {
-                                        totalSpending = totalSpending + Float.parseFloat(foodExp.get(i).getAmount());
-                                    }
-                                    totalSpendingtext.setText("Rs " + totalSpending);
-                                    return;
-                                }
-                            }
-                        }
-
-                    }
-                }
-                // if (callBack_cars != null) {
-                //   callBack_cars.dataReady(cars);
-                //  }
-
-
-                                 */
 
 
             @Override
@@ -317,138 +106,63 @@ public class MyCategoryDetalis extends Fragment {
             }
 
         });
-/*
+    }
+
+    private void mySwichCase1(DataSnapshot child2, String key, List<ExpenseTable> expnsesToShowByCategory) {
         switch (key) {
             case "Food":
                 categoryTitle.setText("Food Expenses");
-
-
-                //List<ExpenseTable> foodExpenses = new ArrayList<>();
-                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        //LiveData<List<ExpenseTable>> ExpenseTable = new ArrayList<>();
-                        for (DataSnapshot child : snapshot.getChildren()) {//users
-                            if (child.getKey().equals(ExpenseRepository.userName)) {//if enter then in the user
-                                for (DataSnapshot child1 : child.getChildren()) {//expneses
-                                    for (DataSnapshot child2 : child1.getChildren()) {
-                                        if(child2.getKey().equals("Food")) {
-                                            for (DataSnapshot child3 : child2.getChildren()) {//items of type
-                                                try {
-                                                    ExpenseTable expenseTable = child3.getValue(ExpenseTable.class);
-                                                    foodExp.add(expenseTable);
-                                                } catch (Exception ex) {
-                                                }
-                                            }
-                                            adapter.setNotes(foodExp);
-                                            for (int i = 0; i < foodExp.size(); i++) {
-                                                totalSpending = totalSpending + Float.parseFloat(foodExp.get(i).getAmount());
-                                            }
-                                            totalSpendingtext.setText("Rs " + totalSpending);
-                                            return;
-                                        }
-                                    }
-                                }
-
-                            }
-                        }
-                        // if (callBack_cars != null) {
-                        //   callBack_cars.dataReady(cars);
-                        //  }
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-
-                });
-
-
-                categoryViewModel.getFoodCategory().observe(getViewLifecycleOwner(), new Observer<List<ExpenseTable>>() {
-                    @Override
-                    public void onChanged(List<ExpenseTable> expenseTables) {
-                        adapter.setNotes(expenseTables);
-                        for (int i = 0; i < expenseTables.size(); i++) {
-                            totalSpending = totalSpending + Float.parseFloat(expenseTables.get(i).getAmount());
-                        }
-                        totalSpendingtext.setText("Rs " + totalSpending);
-                    }
-                });
-
-
+                if (child2.getKey().equals("Food")) {
+                    insertIntoExpnsesToShowByCategory(child2, expnsesToShowByCategory);
+                }
                 break;
             case "Travel":
                 categoryTitle.setText("Travel Expenses");
-                categoryViewModel.getTravelCategory().observe(getViewLifecycleOwner(), new Observer<List<ExpenseTable>>() {
-                    @Override
-                    public void onChanged(List<ExpenseTable> expenseTables) {
-                        adapter.setNotes(expenseTables);
-                        for (int i = 0; i < expenseTables.size(); i++) {
-                            totalSpending = totalSpending + Float.parseFloat(expenseTables.get(i).getAmount());
-                        }
-                        totalSpendingtext.setText("Rs " + totalSpending);
-                    }
-                });
+                if (child2.getKey().equals("Travel")) {
+                    insertIntoExpnsesToShowByCategory(child2, expnsesToShowByCategory);
+                }
                 break;
             case "Utilities":
                 categoryTitle.setText("Utilities Expenses");
-                categoryViewModel.getUtilityCategory().observe(getViewLifecycleOwner(), new Observer<List<ExpenseTable>>() {
-                    @Override
-                    public void onChanged(List<ExpenseTable> expenseTables) {
-                        adapter.setNotes(expenseTables);
-                        for (int i = 0; i < expenseTables.size(); i++) {
-                            totalSpending = totalSpending + Float.parseFloat(expenseTables.get(i).getAmount());
-                        }
-                        totalSpendingtext.setText("Rs " + totalSpending);
-                    }
-                });
+                if (child2.getKey().equals("Utilities")) {
+                    insertIntoExpnsesToShowByCategory(child2, expnsesToShowByCategory);
+                }
                 break;
             case "Health":
                 categoryTitle.setText("Health Expenses");
-                categoryViewModel.getHealthCategory().observe(getViewLifecycleOwner(), new Observer<List<ExpenseTable>>() {
-                    @Override
-                    public void onChanged(List<ExpenseTable> expenseTables) {
-                        adapter.setNotes(expenseTables);
-                        for (int i = 0; i < expenseTables.size(); i++) {
-                            totalSpending = totalSpending + Float.parseFloat(expenseTables.get(i).getAmount());
-                        }
-                        totalSpendingtext.setText("Rs " + totalSpending);
-                    }
-                });
+                if (child2.getKey().equals("Health")) {
+                    insertIntoExpnsesToShowByCategory(child2, expnsesToShowByCategory);
+                }
+
+
                 break;
             case "Shopping":
                 categoryTitle.setText("Shopping Expenses");
-                categoryViewModel.getShoppingCategory().observe(getViewLifecycleOwner(), new Observer<List<ExpenseTable>>() {
-                    @Override
-                    public void onChanged(List<ExpenseTable> expenseTables) {
-                        adapter.setNotes(expenseTables);
-                        for (int i = 0; i < expenseTables.size(); i++) {
-                            totalSpending = totalSpending + Float.parseFloat(expenseTables.get(i).getAmount());
-                        }
-                        totalSpendingtext.setText("Rs " + totalSpending);
-                    }
-                });
+                if (child2.getKey().equals("Shopping")) {
+                    insertIntoExpnsesToShowByCategory(child2, expnsesToShowByCategory);
+                }
                 break;
             case "Others":
                 categoryTitle.setText("Others Expenses");
-                categoryViewModel.getOthersCategory().observe(getViewLifecycleOwner(), new Observer<List<ExpenseTable>>() {
-                    @Override
-                    public void onChanged(List<ExpenseTable> expenseTables) {
-                        adapter.setNotes(expenseTables);
-                        for (int i = 0; i < expenseTables.size(); i++) {
-                            totalSpending = totalSpending + Float.parseFloat(expenseTables.get(i).getAmount());
-                        }
-                        totalSpendingtext.setText("Rs " + totalSpending);
-                    }
-                });
+                if (child2.getKey().equals("Others")) {
+                    insertIntoExpnsesToShowByCategory(child2, expnsesToShowByCategory);
+                }
                 break;
-
-
         }
     }
 
- */
+    private void insertIntoExpnsesToShowByCategory(DataSnapshot child2, List<ExpenseTable> expnsesToShowByCategory) {
+        for (DataSnapshot child3 : child2.getChildren()) {//items of type
+            try {
+                ExpenseTable expenseTable = child3.getValue(ExpenseTable.class);
+                expnsesToShowByCategory.add(expenseTable);
+            } catch (Exception ex) {
+            }
+        }
+        adapter.setNotes(expnsesToShowByCategory);
+        for (int i = 0; i < expnsesToShowByCategory.size(); i++) {
+            totalSpending = totalSpending + Float.parseFloat(expnsesToShowByCategory.get(i).getAmount());
+        }
+        totalSpendingtext.setText("Rs " + totalSpending);
     }
 }

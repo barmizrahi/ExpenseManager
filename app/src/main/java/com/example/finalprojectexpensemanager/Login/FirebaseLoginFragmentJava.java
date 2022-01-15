@@ -46,30 +46,18 @@ public class FirebaseLoginFragmentJava extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.auth = FirebaseAuth.getInstance();
-/*
-        if (auth.getCurrentUser() != null) {
-
-            FragmentKt.findNavController(this).navigate(FirebaseLoginFragmentJavaDirections.actionFirebaseLoginJavaFragmentToLoginJavaFragment());
-        }
-
- */
-
 
     }
 
     public void onStart() {
         super.onStart();
 
-
-        //  FirebaseUser currentUser = auth.getCurrentUser();
-        // UpdateUI(currentUser);
     }
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_firebase_login, container, false);
         activity = this.getActivity();
-
         notRegistered = view.findViewById(R.id.notRegistered);
         login = view.findViewById(R.id.login);
         firebaseEmailLogin = view.findViewById(R.id.firebaseEmailLogin);
@@ -81,7 +69,6 @@ public class FirebaseLoginFragmentJava extends Fragment {
     private final void UpdateUI(FirebaseUser currentUser) {
         if (currentUser != null) {
             Navigation.findNavController(view).navigate(R.id.action_firebaseLoginJavaFragment_to_loginJavaFragment);
-            // FragmentKt.findNavController(this).navigate(FirebaseLoginFragmentJavaDirections.actionFirebaseLoginJavaFragmentToLoginJavaFragment());
         }
 
     }
@@ -97,7 +84,6 @@ public class FirebaseLoginFragmentJava extends Fragment {
             public final void onClick(View it) {
                 firebaseEmailLogin.setError((CharSequence) null);
                 firebasePasswordLogin.setError((CharSequence) null);
-
                 String email = firebaseEmailLogin.getEditText().getText().toString();
                 String pass = firebasePasswordLogin.getEditText().getText().toString();
                 if (validateInput(email, pass)) {

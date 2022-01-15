@@ -1,20 +1,12 @@
 package com.example.finalprojectexpensemanager.Repository;
 
 import android.app.Application;
-import android.os.AsyncTask;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import com.example.finalprojectexpensemanager.Dao.ExpenseDao;;
-import com.example.finalprojectexpensemanager.Database.ExpenseDatabase;
 import com.example.finalprojectexpensemanager.Entity.ExpenseTable;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,18 +19,18 @@ public class ExpenseRepository {
     public static final String EXPENSES_COUNTER = "counter";
     public static int counter;
     public static String userName;
-    private ExpenseDao expenseDao;
-    private List<ExpenseTable> foodExpenses ;
+    private List<ExpenseTable> foodExpenses;
     private List<ExpenseTable> travelExpenses;
     private List<ExpenseTable> utilitiesExpenses;
-    private List<ExpenseTable> healthExpenses ;
-    private List<ExpenseTable> shoppingExpenses ;
-    private List<ExpenseTable> othersExpenses ;
+    private List<ExpenseTable> healthExpenses;
+    private List<ExpenseTable> shoppingExpenses;
+    private List<ExpenseTable> othersExpenses;
     public static List<ExpenseTable> allExpenses;
 
-public void setAllExpenses(List<ExpenseTable> allExpenses){
-    this.allExpenses = allExpenses;
-}
+    public void setAllExpenses(List<ExpenseTable> allExpenses) {
+        this.allExpenses = allExpenses;
+    }
+
     public ExpenseRepository(Application application) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference(EXPENSE_TABLE_APP);
@@ -51,12 +43,12 @@ public void setAllExpenses(List<ExpenseTable> allExpenses){
                         for (DataSnapshot child1 : child.getChildren()) {//expneses
                             for (DataSnapshot child2 : child1.getChildren()) {
                                 String key = child2.getKey();
-                                myswichCase(child2,key);
-                                }
+                                myswichCase(child2, key);
                             }
                         }
                     }
                 }
+            }
 
 
             @Override
@@ -65,77 +57,106 @@ public void setAllExpenses(List<ExpenseTable> allExpenses){
             }
 
         });
-        ExpenseDatabase expenseDatabase = ExpenseDatabase.getInstance(application);
-        expenseDao = expenseDatabase.expenseDao();
+        // ExpenseDatabase expenseDatabase = ExpenseDatabase.getInstance(application);
+        //expenseDao = expenseDatabase.expenseDao();
     }
 
     private void myswichCase(DataSnapshot child2, String key) {
+        for (DataSnapshot child3 : child2.getChildren()) {//items of type
+            insertExpensesIntoList(key, child3);
+        }
+        /*
         switch (key) {
             case "Food":
                 for (DataSnapshot child3 : child2.getChildren()) {//items of type
-                    try {
-                        ExpenseTable expenseTable = child3.getValue(ExpenseTable.class);
-                        foodExpenses.add(expenseTable);
-                        //allExpenses.add(expenseTable);
-                    } catch (Exception ex) {
-                    }
+                    insertExpensesIntoList(key, child3);
                 }
                 break;
             case "Travel":
                 for (DataSnapshot child3 : child2.getChildren()) {//items of type
-                    try {
-                        ExpenseTable expenseTable = child3.getValue(ExpenseTable.class);
-                        travelExpenses.add(expenseTable);
-                        //allExpenses.add(expenseTable);
-                    } catch (Exception ex) {
-                    }
+                    insertExpensesIntoList(key, child3);
                 }
                 break;
             case "Utilities":
                 for (DataSnapshot child3 : child2.getChildren()) {//items of type
-                    try {
-                        ExpenseTable expenseTable = child3.getValue(ExpenseTable.class);
-                        utilitiesExpenses.add(expenseTable);
-                        // allExpenses.add(expenseTable);
-                    } catch (Exception ex) {
-                    }
+                    insertExpensesIntoList(key, child3);
                 }
                 break;
             case "Health":
                 for (DataSnapshot child3 : child2.getChildren()) {//items of type
-                    try {
-                        ExpenseTable expenseTable = child3.getValue(ExpenseTable.class);
-                        healthExpenses.add(expenseTable);
-                        //allExpenses.add(expenseTable);
-                    } catch (Exception ex) {
-                    }
+                    insertExpensesIntoList(key, child3);
                 }
                 break;
             case "Shopping":
                 for (DataSnapshot child3 : child2.getChildren()) {//items of type
-                    try {
-                        ExpenseTable expenseTable = child3.getValue(ExpenseTable.class);
-                        shoppingExpenses.add(expenseTable);
-                        //allExpenses.add(expenseTable);
-                    } catch (Exception ex) {
-                    }
+                    insertExpensesIntoList(key, child3);
                 }
                 break;
             case "Others":
                 for (DataSnapshot child3 : child2.getChildren()) {//items of type
-                    try {
-                        ExpenseTable expenseTable = child3.getValue(ExpenseTable.class);
-                        othersExpenses.add(expenseTable);
-                        //allExpenses.add(expenseTable);
-                    } catch (Exception ex) {
-                    }
+                    insertExpensesIntoList(key, child3);
                 }
+        }
+
+         */
+    }
+
+    private void insertExpensesIntoList(String key, DataSnapshot child3) {
+        switch (key) {
+            case "Food":
+                try {
+                    ExpenseTable expenseTable = child3.getValue(ExpenseTable.class);
+                    foodExpenses.add(expenseTable);
+                } catch (Exception ex) {
+                }
+
+                break;
+            case "Travel":
+                try {
+                    ExpenseTable expenseTable = child3.getValue(ExpenseTable.class);
+                    travelExpenses.add(expenseTable);
+                } catch (Exception ex) {
+                }
+
+                break;
+            case "Utilities":
+                try {
+                    ExpenseTable expenseTable = child3.getValue(ExpenseTable.class);
+                    utilitiesExpenses.add(expenseTable);
+                } catch (Exception ex) {
+                }
+
+                break;
+            case "Health":
+                try {
+                    ExpenseTable expenseTable = child3.getValue(ExpenseTable.class);
+                    healthExpenses.add(expenseTable);
+                } catch (Exception ex) {
+                }
+
+                break;
+            case "Shopping":
+                try {
+                    ExpenseTable expenseTable = child3.getValue(ExpenseTable.class);
+                    shoppingExpenses.add(expenseTable);
+                } catch (Exception ex) {
+                }
+
+                break;
+            case "Others":
+                try {
+                    ExpenseTable expenseTable = child3.getValue(ExpenseTable.class);
+                    othersExpenses.add(expenseTable);
+                } catch (Exception ex) {
+                }
+
+                break;
         }
     }
 
-    public void add(ExpenseTable expense) {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference(EXPENSE_TABLE_APP);
+    public void add(ExpenseTable expense, DatabaseReference myRef) {
+        //FirebaseDatabase database = FirebaseDatabase.getInstance();
+        //DatabaseReference myRef = database.getReference(EXPENSE_TABLE_APP);
         myRef.child(userName).child(EXPENSE_TABLE).child(expense.getCategory()).child("" + counter).setValue(expense);
         myRef.child(userName).child(EXPENSE_TABLE).child(EXPENSES_COUNTER).setValue("" + counter);
 
@@ -143,7 +164,6 @@ public void setAllExpenses(List<ExpenseTable> allExpenses){
 
     public void update(ExpenseTable expense) {
 
-        //new UpdateNoteAsyncTask(expenseDao).execute(expense);
     }
 
 
@@ -151,21 +171,19 @@ public void setAllExpenses(List<ExpenseTable> allExpenses){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference(EXPENSE_TABLE_APP);
         myRef.child(userName).child(EXPENSE_TABLE).child("Food").removeValue();
-        //foodExpenses.clear();
+
         myRef.child(userName).child(EXPENSE_TABLE).child("Travel").removeValue();
-        //travelExpenses.clear();
+
         myRef.child(userName).child(EXPENSE_TABLE).child("Utilities").removeValue();
-       // utilitiesExpenses.clear();
+
         myRef.child(userName).child(EXPENSE_TABLE).child("Health").removeValue();
-        //healthExpenses.clear();
+
         myRef.child(userName).child(EXPENSE_TABLE).child("Shopping").removeValue();
-        //shoppingExpenses.clear();
+
         myRef.child(userName).child(EXPENSE_TABLE).child("Others").removeValue();
-        //othersExpenses.clear();
-        //new DeleteAllNotesAsyncTask(expenseDao).execute();
         allExpenses.clear();
-        myRef.child(userName).child(EXPENSE_TABLE).child(EXPENSES_COUNTER).setValue(""+0);
-        counter=0;
+        myRef.child(userName).child(EXPENSE_TABLE).child(EXPENSES_COUNTER).setValue("" + 0);
+        counter = 0;
     }
 
     public List<ExpenseTable> getFoodExpenses() {
@@ -202,28 +220,9 @@ public void setAllExpenses(List<ExpenseTable> allExpenses){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference(EXPENSE_TABLE_APP);
         myRef.child(userName).child(EXPENSE_TABLE).child(e.getCategory()).child("" + e.getId()).removeValue();
-        //counter--;
         allExpenses.remove(adapterPosition);
         return e;
     }
-
-/*
-    public static class UpdateNoteAsyncTask extends AsyncTask<ExpenseTable, Void, Void> {
-        private ExpenseDao expenseDao;
-
-        private UpdateNoteAsyncTask(ExpenseDao expenseDao) {
-            this.expenseDao = expenseDao;
-        }
-
-        @Override
-        protected Void doInBackground(ExpenseTable... expenses) {
-            expenseDao.updateExpense(expenses[0]);
-            return null;
-        }
-    }
-
- */
-
 
 
 }
