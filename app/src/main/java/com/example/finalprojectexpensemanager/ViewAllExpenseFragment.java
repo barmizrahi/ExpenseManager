@@ -80,7 +80,6 @@ public class ViewAllExpenseFragment extends Fragment {
                 .setPositiveButton("Refund", R.drawable.ic_delete, new MaterialDialog.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
-                        //choose = 0;
                         ExpenseTable e = expenseViewModel.myDelete(viewHolder1.getAdapterPosition());
                         adapter.notifyItemRemoved(viewHolder1.getAdapterPosition());
                         adapter.notifyItemRangeChanged(viewHolder1.getAdapterPosition(), ExpenseRepository.allExpenses.size());

@@ -142,6 +142,7 @@ public class AddExpFragment extends Fragment {
                     getParentFragmentManager().setFragmentResult("dataFromAddExp", bundle);
                 } else {
                     ExpenseRepository.counter++;
+                    expenseTable.setId(ExpenseRepository.counter);
                     Toast.makeText(activity, "Added Successfully", Toast.LENGTH_SHORT).show();
                     Bundle bundle = new Bundle();
                     bundle.putString("Amount", amountText);
@@ -157,11 +158,6 @@ public class AddExpFragment extends Fragment {
 
             }
         });
-        //Toast.makeText(activity, "Added Successfully", Toast.LENGTH_SHORT).show();
-        //Bundle bundle = new Bundle();
-        //bundle.putString("Amount", amountText);
-        //getParentFragmentManager().setFragmentResult("dataFromAddExp", bundle);
-        //MainFragment.expenseViewModel.insert(expenseTable, myRef);
         Navigation.findNavController(view).navigate(R.id.action_fragment_add_expense_to_fragment_main);
 
     }
