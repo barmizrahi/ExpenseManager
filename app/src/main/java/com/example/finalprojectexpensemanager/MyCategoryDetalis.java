@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
@@ -17,7 +16,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.finalprojectexpensemanager.Repository.ExpenseRepository;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,7 +24,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.robinhood.ticker.TickerUtils;
 import com.robinhood.ticker.TickerView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,19 +45,14 @@ public class MyCategoryDetalis extends Fragment  {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_category_details, container, false);
-        this.activity = getActivity();
+        initView(view);
         Context context = container.getContext();
-        backbtn = view.findViewById(R.id.back);
-        category_view = view.findViewById(R.id.recycler_view3);
-        totalSpendingtext = view.findViewById(R.id.totalspending);
-        categoryTitle = view.findViewById(R.id.category_title);
         totalSpendingtext.setCharacterLists(TickerUtils.provideNumberList());
         category_view.setLayoutManager(new LinearLayoutManager(context));
         getParentFragmentManager().setFragmentResultListener("dataFromCatagory", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                getkey[0] = result.getString(CategoryPage.EXTRA_CATEGORY);
-                int x = 0;
+                getkey[0] = result.getString(getString(R.string.EXTRA_CATEGORY));
                 Toast.makeText(context, "selected key" + getkey[0], Toast.LENGTH_SHORT).show();
                 category_view.setAdapter(adapter);
                 categoryViewModel = new ViewModelProvider(requireActivity()).get(CategoryViewModel.class);
@@ -81,9 +73,17 @@ public class MyCategoryDetalis extends Fragment  {
         return view;
     }
 
+    private void initView(View view) {
+        this.activity = getActivity();
+        backbtn = view.findViewById(R.id.back);
+        category_view = view.findViewById(R.id.recycler_view3);
+        totalSpendingtext = view.findViewById(R.id.totalspending);
+        categoryTitle = view.findViewById(R.id.category_title);
+    }
+
     private void mySwichCase(String key) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference(ExpenseRepository.EXPENSE_TABLE_APP);
+        DatabaseReference myRef = database.getReference(getString(R.string.EXPENSE_TABLE_APP));
         List<ExpenseTable> expnsesToShowByCategory = new ArrayList<>();
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -163,6 +163,6 @@ public class MyCategoryDetalis extends Fragment  {
         for (int i = 0; i < expnsesToShowByCategory.size(); i++) {
             totalSpending = totalSpending + Float.parseFloat(expnsesToShowByCategory.get(i).getAmount());
         }
-        totalSpendingtext.setText("Rs " + totalSpending);
+        totalSpendingtext.setText( ""+ totalSpending+ExpenseRepository.coin);
     }
 }

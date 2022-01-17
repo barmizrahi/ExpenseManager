@@ -10,13 +10,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-
-import com.example.finalprojectexpensemanager.Entity.ExpenseTable;
 import com.example.finalprojectexpensemanager.Repository.ExpenseRepository;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -57,13 +53,18 @@ public class FirebaseLoginFragmentJava extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_firebase_login, container, false);
+        initView(view);
+        return view;
+    }
+
+    private void initView(View view) {
         activity = this.getActivity();
+        activity.setTitle("Login");
         notRegistered = view.findViewById(R.id.notRegistered);
         login = view.findViewById(R.id.login);
         firebaseEmailLogin = view.findViewById(R.id.firebaseEmailLogin);
         firebasePasswordLogin = view.findViewById(R.id.firebasePasswordLogin);
         progressBar = view.findViewById(R.id.progressBar);
-        return view;
     }
 
     private final void UpdateUI(FirebaseUser currentUser) {
@@ -91,7 +92,7 @@ public class FirebaseLoginFragmentJava extends Fragment {
                     String[] mailToDataBase = email.split("@");
                     ExpenseRepository.userName = mailToDataBase[0];
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    DatabaseReference myRef = database.getReference(ExpenseRepository.EXPENSE_TABLE_APP);
+                    DatabaseReference myRef = database.getReference(getString(R.string.EXPENSE_TABLE_APP));
                     try {
                         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -99,12 +100,14 @@ public class FirebaseLoginFragmentJava extends Fragment {
                                 for (DataSnapshot child : snapshot.getChildren()) {//users
                                     if (child.getKey().equals(mailToDataBase[0])) {//if enter then in the user
                                         for (DataSnapshot child1 : child.getChildren()) {//expneses
-                                            for (DataSnapshot child2 : child1.getChildren()) {//all catagoty ulnil we ariive to counter
-                                                if (child2.getKey().equals(ExpenseRepository.EXPENSES_COUNTER)) {
+                                            for (DataSnapshot child2 : child1.getChildren()) {//all keys until we arrive to counter
+                                                if (child2.getKey().equals(getString(R.string.EXPENSES_COUNTER))) {
                                                     ExpenseRepository.counter = Integer.parseInt(child2.getValue(String.class));
                                                     isCounterChange = true;
                                                 }
-
+                                                if(child2.getKey().equals(getString(R.string.COIN))){
+                                                    ExpenseRepository.coin = child2.getValue(String.class);
+                                                }
                                             }
                                         }
                                         break;
@@ -113,7 +116,7 @@ public class FirebaseLoginFragmentJava extends Fragment {
                                 }
 
                                 if (isCounterChange == false) {
-                                    myRef.child(mailToDataBase[0]).child(ExpenseRepository.EXPENSE_TABLE).child(ExpenseRepository.EXPENSES_COUNTER).setValue("" + 0);
+                                    myRef.child(mailToDataBase[0]).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.EXPENSES_COUNTER)).setValue("" + 0);
                                 }
                             }
 
@@ -125,7 +128,7 @@ public class FirebaseLoginFragmentJava extends Fragment {
                         });
 
                     } catch (Exception e) {
-                        myRef.child(mailToDataBase[0]).child(ExpenseRepository.EXPENSE_TABLE).child(ExpenseRepository.EXPENSES_COUNTER).setValue("" + 0);
+                        myRef.child(mailToDataBase[0]).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.EXPENSES_COUNTER)).setValue("" + 0);
                     }
 
                     getAuth().signInWithEmailAndPassword(email, pass).addOnCompleteListener((OnCompleteListener) (new OnCompleteListener() {

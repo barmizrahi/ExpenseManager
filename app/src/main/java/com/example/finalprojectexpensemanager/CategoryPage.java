@@ -1,5 +1,6 @@
 package com.example.finalprojectexpensemanager;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,17 +12,18 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 public class CategoryPage extends Fragment {
-    public static String EXTRA_CATEGORY = "Category";
-    CardView food_Cat, travel_cat, utilities_cat, health_cat, shopping_cat, others_cat;
-    Context context;
+    private CardView food_Cat, travel_cat, utilities_cat, health_cat, shopping_cat, others_cat;
+    private Context context;
     private View view;
     private ImageButton categoty_back_btn;
+    private Activity activity;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         context = container.getContext();
         this.view = inflater.inflate(R.layout.fragment_category_page, container, false);
         init(view);
+        activity.setTitle("Select Category");
         categoty_back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,7 +72,7 @@ public class CategoryPage extends Fragment {
 
     private void navigate(String val) {
         Bundle bundle = new Bundle();
-        bundle.putString(EXTRA_CATEGORY, val);
+        bundle.putString(getString(R.string.EXTRA_CATEGORY), val);
         getParentFragmentManager().setFragmentResult("dataFromCatagory", bundle);
         Navigation.findNavController(view).navigate(R.id.action_fragment_category_page_to_fragmentMyCategotyDetalis);
     }
@@ -83,6 +85,7 @@ public class CategoryPage extends Fragment {
         health_cat = view.findViewById(R.id.Health_cat);
         shopping_cat = view.findViewById(R.id.Shopping_cat);
         others_cat = view.findViewById(R.id.Others_cat);
+        activity = getActivity();
     }
 
 }

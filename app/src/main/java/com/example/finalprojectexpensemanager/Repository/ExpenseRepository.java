@@ -14,11 +14,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class ExpenseRepository {
-    public static final String EXPENSE_TABLE_APP = "myExpenseApp";
-    public static final String EXPENSE_TABLE = "expenses";
-    public static final String EXPENSES_COUNTER = "counter";
+    public final String EXPENSE_TABLE_APP = "myExpenseApp";
+    public final String EXPENSE_TABLE = "expenses";
+    public final String EXPENSES_COUNTER = "counter";
     public static int counter;
     public static String userName;
+    public static String coin;
+    public static int reset;
     private List<ExpenseTable> foodExpenses;
     private List<ExpenseTable> travelExpenses;
     private List<ExpenseTable> utilitiesExpenses;
@@ -121,7 +123,6 @@ public class ExpenseRepository {
     public void add(ExpenseTable expense, DatabaseReference myRef) {
         myRef.child(userName).child(EXPENSE_TABLE).child(expense.getCategory()).child("" + counter).setValue(expense);
         myRef.child(userName).child(EXPENSE_TABLE).child(EXPENSES_COUNTER).setValue("" + counter);
-
     }
 
     public void update(ExpenseTable expense) {

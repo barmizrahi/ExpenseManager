@@ -1,6 +1,7 @@
 package com.example.finalprojectexpensemanager.Login;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -33,6 +34,7 @@ public class FirebaseRegisterFragmentJava extends Fragment {
     private TextInputLayout firebasePasswordRegister;
     private ProgressBar progressBar2;
     private View view;
+    private Activity activity;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,12 +56,18 @@ public class FirebaseRegisterFragmentJava extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_firebase_register, container, false);
+        initView(view);
+        return view;
+    }
+
+    private void initView(View view) {
         AlreadyRegistered = view.findViewById(R.id.AlreadyRegistered);
         register = view.findViewById(R.id.register);
+        activity = getActivity();
+        activity.setTitle("Register");
         firebaseEmailRegister = view.findViewById(R.id.firebaseEmailRegister);
         firebasePasswordRegister = view.findViewById(R.id.firebasePasswordRegister);
         progressBar2 = view.findViewById(R.id.progressBar2);
-        return view;
     }
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -85,8 +93,8 @@ public class FirebaseRegisterFragmentJava extends Fragment {
                                 String[] mailToDataBase = email.split("@");
                                 ExpenseRepository.userName = mailToDataBase[0];
                                 FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                DatabaseReference myRef = database.getReference(ExpenseRepository.EXPENSE_TABLE_APP);
-                                myRef.child(mailToDataBase[0]).child(ExpenseRepository.EXPENSE_TABLE).child(ExpenseRepository.EXPENSES_COUNTER).setValue("" + 0);
+                                DatabaseReference myRef = database.getReference(getString(R.string.EXPENSE_TABLE_APP));
+                                myRef.child(mailToDataBase[0]).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.EXPENSES_COUNTER)).setValue("" + 0);
 
                                 Navigation.findNavController(view).navigate(R.id.action_firebaseRegisterFragment_to_loginFragment);
                             } else {

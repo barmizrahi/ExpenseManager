@@ -3,6 +3,7 @@ plugins {
     id 'com.google.gms.google-services'
     id 'com.google.android.secrets-gradle-plugin' version '1.1.0'
     id 'androidx.navigation.safeargs'
+
 }
 
 android {
@@ -50,19 +51,14 @@ dependencies {
 
     implementation 'androidx.navigation:navigation-fragment:2.3.5'
     implementation 'androidx.navigation:navigation-ui:2.3.5'
-    //implementation 'com.google.android.gms:play-services-base:18.0.1'
     def room_version = "2.2.1"
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.firebase:firebase-auth:21.0.1'
-    implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.android.gms:play-services-auth:20.0.1'
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
     implementation 'com.robertlevonyan.view:MaterialChipView:2.0.4'
-    //compile 'com.robertlevonyan.view:MaterialChipView:MaterialChipVersion'
-    //implementation 'com.robertlevonyan.view:MaterialChipView:<MaterialChipVersion>'
-//    implementation("com.robertlevonyan.compose:materialchip:$ComposeChipVersion")
     implementation platform('com.google.firebase:firebase-bom:29.0.3')
     implementation 'com.google.android.gms:play-services-location:19.0.1'
 
@@ -117,6 +113,7 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
     implementation 'com.google.firebase:firebase-database:20.0.3'
+
 }
 }
 

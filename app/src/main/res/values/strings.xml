@@ -20,5 +20,19 @@
     <string name="close_drawer">Close Drawer</string>
     <string name="navigation_drawer">Navigation Drawer</string>
     <string name="transactions_on_this_date">Transactions On This Date</string>
+    <string name="EXPENSE_TABLE_APP">myExpenseApp</string>
+    <string name="EXPENSES_COUNTER">counter</string>
+    <string name="EXPENSE_TABLE">expenses</string>
+    <string name="NAMEDB">Name</string>
+    <string name="RESET">Reset</string>
+    <string name="BUDGETDB">Budget</string>
+    <string name="INCOMEDB">Income</string>
+    <string name="EXTRA_CATEGORY">Category</string>
     <string name="_2022">2022</string>
+    <string name="COIN">Coin</string>
+    <string-array name="coins_array">
+        <item>NIS</item>
+        <item>Dollar</item>
+        <item>Euro</item>
+    </string-array>
 </resources>

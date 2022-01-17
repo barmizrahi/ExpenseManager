@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,7 +19,6 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.finalprojectexpensemanager.Entity.ExpenseTable;
-import com.example.finalprojectexpensemanager.LoginAndSaved.LoginFragment;
 import com.example.finalprojectexpensemanager.Repository.ExpenseRepository;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.Chip;
@@ -30,7 +30,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.Calendar;
 
 public class AddExpFragment extends Fragment {
@@ -44,43 +43,24 @@ public class AddExpFragment extends Fragment {
     private int mYear, mMonth, mDay;
     private ChipGroup chipGroup;
     private String category;
+    private ImageButton back_add;
     private Boolean isSelected = false;
     private Activity activity;
     private View view;
+    private Context context;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_add_expense, container, false);
         initView();
-        Context context = container.getContext();
-
+        activity.setTitle("Add Expense");
+        context = container.getContext();
         selectdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setDate();
                 // Get Current Date
-                final Calendar c = Calendar.getInstance();
-                mYear = c.get(Calendar.YEAR);
-                mMonth = c.get(Calendar.MONTH);
-                mDay = c.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog datePickerDialog = new DatePickerDialog(context,
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year,
-                                                  int monthOfYear, int dayOfMonth) {
-                                String day, month;
-                                if (dayOfMonth < 10) {
-                                    day = "0" + dayOfMonth;
-                                } else
-                                    day = "" + (dayOfMonth);
-                                if (monthOfYear < 10) {
-                                    month = "0" + (monthOfYear + 1);
-                                } else
-                                    month = "" + (monthOfYear + 1);
-                                date.setText(year + "-" + month + "-" + day);
-                            }
-                        }, mYear, mMonth, mDay);
-                datePickerDialog.show();
             }
         });
 
@@ -98,11 +78,41 @@ public class AddExpFragment extends Fragment {
                 if (chip != null) {
                     category = chip.getText().toString();
                     isSelected = true;
-                    //Toast.makeText(context, "" + chip.getText().toString(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
+        back_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(view).navigate(R.id.action_fragment_add_expense_to_fragment_main);
+            }
+        });
         return view;
+    }
+
+    private void setDate() {
+        final Calendar c = Calendar.getInstance();
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog datePickerDialog = new DatePickerDialog(context,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+                        String day, month;
+                        if (dayOfMonth < 10) {
+                            day = "0" + dayOfMonth;
+                        } else
+                            day = "" + (dayOfMonth);
+                        if (monthOfYear < 10) {
+                            month = "0" + (monthOfYear + 1);
+                        } else
+                            month = "" + (monthOfYear + 1);
+                        date.setText(year + "-" + month + "-" + day);
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
     }
 
     private void initView() {
@@ -114,6 +124,7 @@ public class AddExpFragment extends Fragment {
         selectdate = view.findViewById(R.id.selectDate);
         save = view.findViewById(R.id.addButton);
         title = view.findViewById(R.id.titleID);
+        back_add = view.findViewById(R.id.back_add);
         activity.setTitle("Add Expense");
         title.setText("Add Expense");
         chipGroup = view.findViewById(R.id.categoryChipGroup);
@@ -129,17 +140,38 @@ public class AddExpFragment extends Fragment {
             Toast.makeText(getContext(), "Please fill all the fields", Toast.LENGTH_SHORT).show();
             return;
         }
+    try {
+        if (Integer.parseInt(amountText) < 0) {
+            amount.setError("Amount Can't Be Negative");
+            return;
+        }
+    }
+    catch (NumberFormatException e){
+        amount.setError("Amount Need To Be A Integer");
+    }
         ExpenseTable expenseTable = new ExpenseTable(nameText, amountText, dateText, descText, categoryData, ExpenseRepository.counter);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference(ExpenseRepository.EXPENSE_TABLE_APP);
-        myRef.child(ExpenseRepository.userName).child(ExpenseRepository.EXPENSE_TABLE).child(LoginFragment.BUDGETDB).addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference myRef = database.getReference(getString(R.string.EXPENSE_TABLE_APP));
+        tryToAdd(expenseTable,myRef,amountText);
+        Navigation.findNavController(view).navigate(R.id.action_fragment_add_expense_to_fragment_main);
+
+    }
+
+    private void tryToAdd(ExpenseTable expenseTable, DatabaseReference myRef, String amountText) {
+        myRef.child(ExpenseRepository.userName).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.BUDGETDB)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if ((Integer.parseInt(snapshot.getValue(String.class)) - Integer.parseInt(expenseTable.getAmount()) < 0)) {
+                if(Integer.parseInt(expenseTable.getAmount())<0){
+                    Toast.makeText(getContext(), "Amount Can't Be Negative", Toast.LENGTH_SHORT).show();
+                }
+                if ((Integer.parseInt(snapshot.getValue(String.class)) - Integer.parseInt(expenseTable.getAmount())) < 0) {
                     Toast.makeText(activity, "Not Enough Money", Toast.LENGTH_SHORT).show();
+                    /*
                     Bundle bundle = new Bundle();
                     bundle.putString("Amount", "" + 0);
                     getParentFragmentManager().setFragmentResult("dataFromAddExp", bundle);
+
+                     */
                 } else {
                     ExpenseRepository.counter++;
                     expenseTable.setId(ExpenseRepository.counter);
@@ -149,8 +181,6 @@ public class AddExpFragment extends Fragment {
                     getParentFragmentManager().setFragmentResult("dataFromAddExp", bundle);
                     MainFragment.expenseViewModel.insert(expenseTable,myRef);
                 }
-
-
             }
 
             @Override
@@ -158,8 +188,6 @@ public class AddExpFragment extends Fragment {
 
             }
         });
-        Navigation.findNavController(view).navigate(R.id.action_fragment_add_expense_to_fragment_main);
-
     }
 
 

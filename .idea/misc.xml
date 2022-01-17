@@ -23,14 +23,14 @@
         <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/layout/activity_main.xml" value="0.152" />
         <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/layout/expense_all_item.xml" value="0.24739583333333334" />
         <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/layout/expense_item.xml" value="0.24739583333333334" />
-        <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/layout/fragment_add_expense.xml" value="0.24739583333333334" />
+        <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/layout/fragment_add_expense.xml" value="0.264" />
         <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/layout/fragment_category_details.xml" value="0.264" />
         <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/layout/fragment_category_page.xml" value="0.24739583333333334" />
         <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/layout/fragment_firebase_google_login.xml" value="0.24739583333333334" />
         <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/layout/fragment_firebase_login.xml" value="0.24739583333333334" />
         <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/layout/fragment_firebase_register.xml" value="0.24739583333333334" />
         <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/layout/fragment_login.xml" value="0.24739583333333334" />
-        <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/layout/fragment_main.xml" value="0.5311418685121108" />
+        <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/layout/fragment_main.xml" value="0.264" />
         <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/layout/fragment_saved_profile.xml" value="0.24739583333333334" />
         <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/layout/fragment_view_all_expense.xml" value="0.24739583333333334" />
         <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/menu/main_menu.xml" value="0.21979166666666666" />
@@ -38,6 +38,7 @@
         <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/menu/profile_edit.xml" value="0.21979166666666666" />
         <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/menu/transaction_list.xml" value="0.21979166666666666" />
         <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/menu/transaction_login.xml" value="0.1390625" />
+        <entry key="..\:/Users/barm4/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_spinner_dropdown_item.xml" value="0.16458333333333333" />
       </map>
     </option>
   </component>

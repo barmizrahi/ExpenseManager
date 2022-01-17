@@ -2,8 +2,6 @@ package com.example.finalprojectexpensemanager;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,11 +10,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
@@ -25,15 +21,10 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.finalprojectexpensemanager.LoginAndSaved.LoginFragment;
 import com.example.finalprojectexpensemanager.Repository.ExpenseRepository;
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import com.example.finalprojectexpensemanager.Adapters.ExpenseAdapter;
 import com.example.finalprojectexpensemanager.Entity.ExpenseTable;
 import com.example.finalprojectexpensemanager.ViewModel.ExpenseViewModel;
@@ -42,14 +33,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import dev.shreyaspatil.MaterialDialog.MaterialDialog;
 import dev.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
 
 public class MainFragment extends Fragment {
-    public static final int ADD_NOTE_REQUEST = 1;
-    public static final int EDIT_NOTE_REQUEST = 2;
-    public static final int RESULT_OK = -1;
     private Button category_button;
     public static ExpenseViewModel expenseViewModel;
     private MaterialDialog mDialog;
@@ -57,9 +44,7 @@ public class MainFragment extends Fragment {
     private TextView no_expense;
     private TextView transactionText;
     private TextView viewAllTransaction;
-    private EditText et_edit_amount;
-    private MaterialButton btn_ok;
-    private ImageView edit_amount;
+    private ImageView img_refresh_balance;
     private LinearLayoutManager HorizontalLayout;
     private Activity activity;
     private TextView amount_remaining2;
@@ -68,17 +53,18 @@ public class MainFragment extends Fragment {
     private View view;
     final String[] getkey = {"0"};
     public static List<ExpenseTable> finalE;
+    private String userName;
+    private RecyclerView recyclerView;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Context context = container.getContext();
         view = inflater.inflate(R.layout.fragment_main, container, false);
-        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-        expenseViewModel = new ViewModelProvider(requireActivity()).get(ExpenseViewModel.class);
+
         initView(view);
         final ExpenseAdapter adapter = new ExpenseAdapter();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference(ExpenseRepository.EXPENSE_TABLE_APP);
+        DatabaseReference myRef = database.getReference(getString(R.string.EXPENSE_TABLE_APP));
         //insert into name_text the name of user
         editName(myRef);
         //insert into amount_remaining2 a value
@@ -128,36 +114,36 @@ public class MainFragment extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.action_fragment_main_to_fragment_category_page);
             }
         });
-        //Material Dialog
+
         initMDialog(recyclerView,adapter);
-        /*
-        edit_amount.setOnClickListener(new View.OnClickListener() {
+        img_refresh_balance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btn_ok.setVisibility(View.VISIBLE);
-                et_edit_amount.setVisibility(View.VISIBLE);
-                amount_remaining2.setVisibility(View.GONE);
+                myRef.child(userName).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.RESET)).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String helper = snapshot.getValue(String.class);
+                        myRef.child(userName).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.BUDGETDB)).setValue(""+helper);
+                        amount_remaining2.setText(""+helper+ExpenseRepository.coin);
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
+        myRef.child(userName).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.RESET)).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ExpenseRepository.reset = Integer.parseInt(snapshot.getValue(String.class));
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
 
-         */
-        btn_ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int newAmount = Integer.parseInt(et_edit_amount.getText().toString());
-                if(newAmount>0){
-                    myRef.child(ExpenseRepository.userName).child(ExpenseRepository.EXPENSE_TABLE).child(LoginFragment.BUDGETDB).setValue(""+newAmount);
-                    btn_ok.setVisibility(View.GONE);
-                    et_edit_amount.setVisibility(View.GONE);
-                    et_edit_amount.setText(""+0);
-                    amount_remaining2.setVisibility(View.VISIBLE);
-                    amount_remaining2.setText(""+newAmount);
-                }
-                else{
-                    Toast.makeText(activity, "Amount can't be negative", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
         return view;
     }
 
@@ -198,7 +184,7 @@ public class MainFragment extends Fragment {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot child : snapshot.getChildren()) {
-                            if (child.getKey().equals(ExpenseRepository.userName)) {//then enter to the user now
+                            if (child.getKey().equals(userName)) {//then enter to the user now
                                 for (DataSnapshot child1 : child.getChildren()) {//expneses
                                     for (DataSnapshot child2 : child1.getChildren()) {
                                         for (DataSnapshot child3 : child2.getChildren()) {//items of type
@@ -242,15 +228,14 @@ public class MainFragment extends Fragment {
 
     private void editBudget(DatabaseReference myRef) {
         final int[] cur = new int[1];
-        myRef.child(ExpenseRepository.userName).child(ExpenseRepository.EXPENSE_TABLE).child(LoginFragment.BUDGETDB).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child(userName).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.BUDGETDB)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String helper = snapshot.getValue(String.class);
                 cur[0] = Integer.parseInt(helper) -  Integer.parseInt(getkey[0]);
-                myRef.child(ExpenseRepository.userName).child(ExpenseRepository.EXPENSE_TABLE).child(LoginFragment.BUDGETDB).setValue(""+cur[0]);
-                amount_remaining2.setText(""+cur[0]);
+                myRef.child(userName).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.BUDGETDB)).setValue(""+cur[0]);
+                amount_remaining2.setText(""+cur[0]+ExpenseRepository.coin);
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -259,7 +244,7 @@ public class MainFragment extends Fragment {
     }
 
     private void editName(DatabaseReference myRef) {
-        myRef.child(ExpenseRepository.userName).child(ExpenseRepository.EXPENSE_TABLE).child(LoginFragment.NAMEDB).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child(userName).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.NAMEDB)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 name_text.setText(snapshot.getValue(String.class));
@@ -282,9 +267,8 @@ public class MainFragment extends Fragment {
     private void initView(View view) {
         activity = this.getActivity();
         activity.setTitle("Expense Manager");
-        edit_amount = view.findViewById(R.id.img_edit_amount);
+        img_refresh_balance = view.findViewById(R.id.img_refresh_balance);
         buttonAddNote = view.findViewById(R.id.button_add_note);
-        //SharedPreferences sharedPreferences = activity.getSharedPreferences("login", Context.MODE_PRIVATE);
         deleteAll = view.findViewById(R.id.deleteAllExpense);
         no_expense = view.findViewById(R.id.no_expense);
         transactionText = view.findViewById(R.id.transaction);
@@ -292,8 +276,9 @@ public class MainFragment extends Fragment {
         category_button = view.findViewById(R.id.category_button);
         amount_remaining2 = view.findViewById(R.id.amount_remaining2);
         name_text = view.findViewById(R.id.name_text);
-        et_edit_amount = view.findViewById(R.id.et_edit_amount);
-        btn_ok = view.findViewById(R.id.btn_ok);
+        userName = ExpenseRepository.userName;
+        recyclerView = view.findViewById(R.id.recycler_view);
+        expenseViewModel = new ViewModelProvider(requireActivity()).get(ExpenseViewModel.class);
     }
 
 
@@ -313,6 +298,9 @@ public class MainFragment extends Fragment {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    public void callParentMethod(){
+        activity.onBackPressed();
     }
 
 }
