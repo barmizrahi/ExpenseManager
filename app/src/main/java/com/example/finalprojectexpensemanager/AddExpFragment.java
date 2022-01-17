@@ -148,6 +148,7 @@ public class AddExpFragment extends Fragment {
     }
     catch (NumberFormatException e){
         amount.setError("Amount Need To Be A Integer");
+        return;
     }
         ExpenseTable expenseTable = new ExpenseTable(nameText, amountText, dateText, descText, categoryData, ExpenseRepository.counter);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -161,17 +162,8 @@ public class AddExpFragment extends Fragment {
         myRef.child(ExpenseRepository.userName).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.BUDGETDB)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(Integer.parseInt(expenseTable.getAmount())<0){
-                    Toast.makeText(getContext(), "Amount Can't Be Negative", Toast.LENGTH_SHORT).show();
-                }
                 if ((Integer.parseInt(snapshot.getValue(String.class)) - Integer.parseInt(expenseTable.getAmount())) < 0) {
                     Toast.makeText(activity, "Not Enough Money", Toast.LENGTH_SHORT).show();
-                    /*
-                    Bundle bundle = new Bundle();
-                    bundle.putString("Amount", "" + 0);
-                    getParentFragmentManager().setFragmentResult("dataFromAddExp", bundle);
-
-                     */
                 } else {
                     ExpenseRepository.counter++;
                     expenseTable.setId(ExpenseRepository.counter);
