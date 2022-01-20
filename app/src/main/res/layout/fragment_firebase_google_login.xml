@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D6F3F0"
+    android:background="#6F7F87"
     tools:context="com.example.finalprojectexpensemanager.Login.FirebaseGoogleLoginFragmentJava">
 
 

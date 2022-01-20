@@ -16,16 +16,21 @@
         <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/drawable/ic_close.xml" value="0.9583333333333334" />
         <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/drawable/ic_delete.xml" value="0.2140625" />
         <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/drawable/ic_food.xml" value="0.22135416666666666" />
+        <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/drawable/ic_health.xml" value="0.19375" />
+        <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/drawable/ic_insurance.xml" value="0.19375" />
+        <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/drawable/ic_launcher_background.xml" value="0.19375" />
         <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/drawable/ic_others.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/drawable/ic_piechart.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/drawable/ic_save.xml" value="0.22135416666666666" />
+        <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/drawable/ic_shop.xml" value="0.19375" />
+        <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/drawable/ic_travel.xml" value="0.19375" />
         <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/drawable/ic_utility.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/layout/activity_main.xml" value="0.152" />
         <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/layout/expense_all_item.xml" value="0.24739583333333334" />
         <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/layout/expense_item.xml" value="0.24739583333333334" />
         <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/layout/fragment_add_expense.xml" value="0.264" />
         <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/layout/fragment_category_details.xml" value="0.264" />
-        <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/layout/fragment_category_page.xml" value="0.24739583333333334" />
+        <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/layout/fragment_category_page.xml" value="0.264" />
         <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/layout/fragment_firebase_google_login.xml" value="0.24739583333333334" />
         <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/layout/fragment_firebase_login.xml" value="0.24739583333333334" />
         <entry key="..\:/Users/barm4/AndroidStudioProjects/finalProjectExpenseManager/app/src/main/res/layout/fragment_firebase_register.xml" value="0.24739583333333334" />

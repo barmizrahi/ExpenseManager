@@ -70,7 +70,7 @@
                         android:layout_width="121dp"
                         android:layout_height="94dp"
                         android:layout_gravity="center_horizontal"
-                        android:src="@drawable/food" />
+                        android:src="@drawable/img_black_food" />
 
                     <TextView
                         android:text="Food"
@@ -110,7 +110,7 @@
                         android:layout_width="125dp"
                         android:layout_height="104dp"
                         android:layout_gravity="center_horizontal"
-                        android:src="@drawable/travel" />
+                        android:src="@drawable/img_black_travel" />
 
                     <TextView
                         android:text="Travel"
@@ -153,7 +153,7 @@
                         android:layout_width="122dp"
                         android:layout_height="107dp"
                         android:layout_gravity="center_horizontal"
-                        android:src="@drawable/utility" />
+                        android:src="@drawable/img_black_Utilities" />
 
                     <TextView
                         android:text="Utilities"
@@ -190,10 +190,10 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:layout_width="119dp"
+                        android:layout_width="120dp"
                         android:layout_height="101dp"
                         android:layout_gravity="center_horizontal"
-                        android:src="@drawable/shopping" />
+                        android:src="@drawable/img_black_shopping" />
 
                     <TextView
                         android:text="Shopping"
@@ -236,7 +236,7 @@
                         android:layout_width="122dp"
                         android:layout_height="95dp"
                         android:layout_gravity="center_horizontal"
-                        android:src="@drawable/health" />
+                        android:src="@drawable/img_black_Health" />
 
                     <TextView
                         android:text="Health"
@@ -276,7 +276,7 @@
                         android:layout_width="125dp"
                         android:layout_height="100dp"
                         android:layout_gravity="center_horizontal"
-                        android:src="@drawable/others" />
+                        android:src="@drawable/img_black_other" />
 
                     <TextView
                         android:layout_width="wrap_content"

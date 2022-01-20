@@ -196,7 +196,7 @@
                 android:text="Food"
                 app:checkedIconEnabled="false"
                 app:chipBackgroundColor="@color/chip_bg_states"
-                app:chipIcon="@drawable/ic_food"
+                app:chipIcon="@drawable/img_black_food"
                 app:chipIconVisible="true"
                 tools:textColor="@android:color/white" />
 
@@ -206,7 +206,7 @@
                 android:text="Shopping"
                 app:checkedIconEnabled="false"
                 app:chipBackgroundColor="@color/chip_bg_states"
-                app:chipIcon="@drawable/ic_shop"
+                app:chipIcon="@drawable/img_black_shopping"
                 app:chipIconVisible="true"
                 tools:textColor="@android:color/white" />
 
@@ -216,7 +216,7 @@
                 android:text="Utilities"
                 app:checkedIconEnabled="false"
                 app:chipBackgroundColor="@color/chip_bg_states"
-                app:chipIcon="@drawable/ic_utility"
+                app:chipIcon="@drawable/img_black_Utilities"
                 app:chipIconVisible="true"
                 tools:textColor="@android:color/white" />
 
@@ -227,7 +227,7 @@
                 android:text="Travel"
                 app:checkedIconEnabled="false"
                 app:chipBackgroundColor="@color/chip_bg_states"
-                app:chipIcon="@drawable/ic_travel"
+                app:chipIcon="@drawable/img_black_travel"
                 app:chipIconVisible="true"
                 tools:textColor="@android:color/white" />
 
@@ -240,7 +240,7 @@
                 android:text="Health"
                 app:checkedIconEnabled="false"
                 app:chipBackgroundColor="@color/chip_bg_states"
-                app:chipIcon="@drawable/ic_health"
+                app:chipIcon="@drawable/img_black_Health"
                 app:chipIconVisible="true"
                 tools:textColor="@android:color/white" />
 
@@ -254,7 +254,7 @@
                 android:text="Others"
                 app:checkedIconEnabled="false"
                 app:chipBackgroundColor="@color/chip_bg_states"
-                app:chipIcon="@drawable/ic_others"
+                app:chipIcon="@drawable/img_black_other"
                 app:chipIconVisible="true"
                 tools:textColor="@android:color/white" />
 
