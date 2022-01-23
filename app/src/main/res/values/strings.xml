@@ -30,6 +30,9 @@
     <string name="EXTRA_CATEGORY">Category</string>
     <string name="_2022">2022</string>
     <string name="COIN">Coin</string>
+    <string name="TAG">GoogleActivity</string>
+    <string name="LogInBolean">LOG_IN</string>
+    <string name="UserName">USER_NAME</string>
     <string-array name="coins_array">
         <item>NIS</item>
         <item>Dollar</item>

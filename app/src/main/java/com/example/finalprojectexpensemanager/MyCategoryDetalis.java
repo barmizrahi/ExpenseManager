@@ -26,7 +26,6 @@ import com.robinhood.ticker.TickerUtils;
 import com.robinhood.ticker.TickerView;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.example.finalprojectexpensemanager.Adapters.AllTransactionAdapter;
 import com.example.finalprojectexpensemanager.Entity.ExpenseTable;
 import com.example.finalprojectexpensemanager.ViewModel.CategoryViewModel;
@@ -53,7 +52,7 @@ public class MyCategoryDetalis extends Fragment  {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 getkey[0] = result.getString(getString(R.string.EXTRA_CATEGORY));
-                Toast.makeText(context, "selected key" + getkey[0], Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Selected Key" + getkey[0], Toast.LENGTH_SHORT).show();
                 category_view.setAdapter(adapter);
                 categoryViewModel = new ViewModelProvider(requireActivity()).get(CategoryViewModel.class);
                 if (getkey[0] == null) {

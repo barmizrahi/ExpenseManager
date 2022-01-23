@@ -55,12 +55,12 @@ public class MainFragment extends Fragment {
     public static List<ExpenseTable> finalE;
     private String userName;
     private RecyclerView recyclerView;
+    private ImageView Iv_exit;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Context context = container.getContext();
         view = inflater.inflate(R.layout.fragment_main, container, false);
-
         initView(view);
         final ExpenseAdapter adapter = new ExpenseAdapter();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -116,6 +116,7 @@ public class MainFragment extends Fragment {
         });
 
         initMDialog(recyclerView,adapter);
+        //to set the balance to default
         img_refresh_balance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,6 +132,15 @@ public class MainFragment extends Fragment {
 
                     }
                 });
+            }
+        });
+        //exit from the account
+        Iv_exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MSPV3.getMe().putString(getString(R.string.UserName), "");
+                MSPV3.getMe().putString(getString(R.string.LogInBolean), "false");
+                Navigation.findNavController(view).navigate(R.id.action_fragment_main_to_firebaseGoogleLoginJavaFragment);
             }
         });
         myRef.child(userName).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.RESET)).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -150,7 +160,7 @@ public class MainFragment extends Fragment {
     private void initMDialog(RecyclerView recyclerView, ExpenseAdapter adapter) {
         mDialog = new MaterialDialog.Builder(activity)
                 .setTitle("Delete?")
-                .setMessage("Are you sure want to delete all the expenses?")
+                .setMessage("Are You Sure Want To Delete All The Expenses?")
                 .setCancelable(false)
                 .setPositiveButton("Delete", R.drawable.ic_delete, new MaterialDialog.OnClickListener() {
                     @Override
@@ -215,8 +225,6 @@ public class MainFragment extends Fragment {
                         adapter.setNotes(expenseViewModel.getAllExpense());
                         recyclerView.setAdapter(adapter);
                     }
-
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 
@@ -270,6 +278,7 @@ public class MainFragment extends Fragment {
         img_refresh_balance = view.findViewById(R.id.img_refresh_balance);
         buttonAddNote = view.findViewById(R.id.button_add_note);
         deleteAll = view.findViewById(R.id.deleteAllExpense);
+        Iv_exit = view.findViewById(R.id.Iv_exit);
         no_expense = view.findViewById(R.id.no_expense);
         transactionText = view.findViewById(R.id.transaction);
         viewAllTransaction = view.findViewById(R.id.viewAllTransaction);
@@ -293,7 +302,7 @@ public class MainFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.delete_all_notes:
                 expenseViewModel.deleteAllExpense();
-                Toast.makeText(activity, "All expenses deleted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "All Expenses Deleted", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

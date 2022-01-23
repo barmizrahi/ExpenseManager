@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import com.example.finalprojectexpensemanager.MSPV3;
 import com.example.finalprojectexpensemanager.Repository.ExpenseRepository;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -91,46 +92,11 @@ public class FirebaseLoginFragmentJava extends Fragment {
                     progressBar.setVisibility(View.VISIBLE);
                     String[] mailToDataBase = email.split("@");
                     ExpenseRepository.userName = mailToDataBase[0];
+                    MSPV3.getMe().putString(getString(R.string.UserName), ExpenseRepository.userName);
+                    MSPV3.getMe().putString(getString(R.string.LogInBolean), "true");
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference(getString(R.string.EXPENSE_TABLE_APP));
-                    try {
-                        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                for (DataSnapshot child : snapshot.getChildren()) {//users
-                                    if (child.getKey().equals(mailToDataBase[0])) {//if enter then in the user
-                                        for (DataSnapshot child1 : child.getChildren()) {//expneses
-                                            for (DataSnapshot child2 : child1.getChildren()) {//all keys until we arrive to counter
-                                                if (child2.getKey().equals(getString(R.string.EXPENSES_COUNTER))) {
-                                                    ExpenseRepository.counter = Integer.parseInt(child2.getValue(String.class));
-                                                    isCounterChange = true;
-                                                }
-                                                if(child2.getKey().equals(getString(R.string.COIN))){
-                                                    ExpenseRepository.coin = child2.getValue(String.class);
-                                                }
-                                            }
-                                        }
-                                        break;
-                                    }
-
-                                }
-
-                                if (isCounterChange == false) {
-                                    myRef.child(mailToDataBase[0]).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.EXPENSES_COUNTER)).setValue("" + 0);
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-
-                            }
-                        });
-
-                    } catch (Exception e) {
-                        myRef.child(mailToDataBase[0]).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.EXPENSES_COUNTER)).setValue("" + 0);
-                    }
-
+                    editCounterAndCoin(myRef,mailToDataBase);
                     getAuth().signInWithEmailAndPassword(email, pass).addOnCompleteListener((OnCompleteListener) (new OnCompleteListener() {
                         public final void onComplete(Task task) {
                             progressBar.setVisibility(View.INVISIBLE);
@@ -151,6 +117,46 @@ public class FirebaseLoginFragmentJava extends Fragment {
 
             }
         }));
+    }
+
+    private void editCounterAndCoin(DatabaseReference myRef, String[] mailToDataBase) {
+        try {
+            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot child : snapshot.getChildren()) {//users
+                        if (child.getKey().equals(mailToDataBase[0])) {//if enter then in the user
+                            for (DataSnapshot child1 : child.getChildren()) {//expneses
+                                for (DataSnapshot child2 : child1.getChildren()) {//all keys until we arrive to counter
+                                    if (child2.getKey().equals(getString(R.string.EXPENSES_COUNTER))) {
+                                        ExpenseRepository.counter = Integer.parseInt(child2.getValue(String.class));
+                                        isCounterChange = true;
+                                    }
+                                    if(child2.getKey().equals(getString(R.string.COIN))){
+                                        ExpenseRepository.coin = child2.getValue(String.class);
+                                    }
+                                }
+                            }
+                            break;
+                        }
+
+                    }
+
+                    if (isCounterChange == false) {
+                        myRef.child(mailToDataBase[0]).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.EXPENSES_COUNTER)).setValue("" + 0);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+
+                }
+            });
+
+        } catch (Exception e) {
+            myRef.child(mailToDataBase[0]).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.EXPENSES_COUNTER)).setValue("" + 0);
+        }
     }
 
     private FirebaseAuth getAuth() {

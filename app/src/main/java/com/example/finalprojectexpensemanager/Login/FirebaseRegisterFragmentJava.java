@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.example.finalprojectexpensemanager.MSPV3;
 import com.example.finalprojectexpensemanager.Repository.ExpenseRepository;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -92,6 +93,8 @@ public class FirebaseRegisterFragmentJava extends Fragment {
                             if (task.isSuccessful()) {
                                 String[] mailToDataBase = email.split("@");
                                 ExpenseRepository.userName = mailToDataBase[0];
+                                MSPV3.getMe().putString(getString(R.string.UserName), ExpenseRepository.userName);
+                                MSPV3.getMe().putString(getString(R.string.LogInBolean), "true");
                                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                                 DatabaseReference myRef = database.getReference(getString(R.string.EXPENSE_TABLE_APP));
                                 myRef.child(mailToDataBase[0]).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.EXPENSES_COUNTER)).setValue("" + 0);

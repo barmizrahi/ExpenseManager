@@ -23,6 +23,9 @@
         <action
             android:id="@+id/action_fragment_main_to_fragmentViewAllExpense"
             app:destination="@id/fragmentViewAllExpense" />
+        <action
+            android:id="@+id/action_fragment_main_to_firebaseGoogleLoginJavaFragment"
+            app:destination="@id/firebaseGoogleLoginJavaFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragment_add_expense"

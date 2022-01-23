@@ -60,7 +60,7 @@ public class ViewAllExpenseFragment extends Fragment {
 
         mDialog = new MaterialDialog.Builder(activity)
                 .setTitle("Delete?")
-                .setMessage("Do you want a refund?")
+                .setMessage("Do You Want A Refund?")
                 .setCancelable(false)
                 .setPositiveButton("Refund", R.drawable.ic_delete, new MaterialDialog.OnClickListener() {
                     @Override
@@ -138,7 +138,6 @@ public class ViewAllExpenseFragment extends Fragment {
 
     private void addExpnesesToView() {
         expenseView.setLayoutManager(new LinearLayoutManager(context));
-
         expenseView.setAdapter(adapter);
         expenseViewModel = new ViewModelProvider(this).get(AllExpenseViewModel.class);
         expenseTables = expenseViewModel.getAllExpense();

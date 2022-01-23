@@ -23,9 +23,12 @@ public class ExpenseViewModel extends AndroidViewModel {
     public void insert(ExpenseTable expense, DatabaseReference myRef) {
         expenseRepository.add(expense,myRef);
     }
+    /*
     public void update(ExpenseTable expense) {
         expenseRepository.update(expense);
     }
+
+     */
 
     public void deleteAllExpense() {
         expenseRepository.deleteAllNotes();

@@ -1,11 +1,8 @@
 package com.example.finalprojectexpensemanager.Repository;
 
 import android.app.Application;
-
 import androidx.annotation.NonNull;
-
 import java.util.List;
-
 import com.example.finalprojectexpensemanager.Entity.ExpenseTable;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -134,15 +131,10 @@ public class ExpenseRepository {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference(EXPENSE_TABLE_APP);
         myRef.child(userName).child(EXPENSE_TABLE).child("Food").removeValue();
-
         myRef.child(userName).child(EXPENSE_TABLE).child("Travel").removeValue();
-
         myRef.child(userName).child(EXPENSE_TABLE).child("Utilities").removeValue();
-
         myRef.child(userName).child(EXPENSE_TABLE).child("Health").removeValue();
-
         myRef.child(userName).child(EXPENSE_TABLE).child("Shopping").removeValue();
-
         myRef.child(userName).child(EXPENSE_TABLE).child("Others").removeValue();
         allExpenses.clear();
         myRef.child(userName).child(EXPENSE_TABLE).child(EXPENSES_COUNTER).setValue("" + 0);

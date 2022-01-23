@@ -35,22 +35,22 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseH
         holder.categoryText.setText(expenseTable.getCategory());
         switch ((String) holder.categoryText.getText()) {
             case "Food":
-                holder.categoryImage.setImageResource(R.drawable.food);
+                holder.categoryImage.setImageResource(R.drawable.img_black_food);
                 break;
             case "Travel":
-                holder.categoryImage.setImageResource(R.drawable.travel);
+                holder.categoryImage.setImageResource(R.drawable.img_black_travel);
                 break;
             case "Utilities":
-                holder.categoryImage.setImageResource(R.drawable.utility);
+                holder.categoryImage.setImageResource(R.drawable.img_black_utilities);
                 break;
             case "Health":
-                holder.categoryImage.setImageResource(R.drawable.health);
+                holder.categoryImage.setImageResource(R.drawable.img_black_health);
                 break;
             case "Shopping":
-                holder.categoryImage.setImageResource(R.drawable.shopping);
+                holder.categoryImage.setImageResource(R.drawable.img_black_shopping);
                 break;
             case "Others":
-                holder.categoryImage.setImageResource(R.drawable.others);
+                holder.categoryImage.setImageResource(R.drawable.img_black_other);
                 break;
 
 

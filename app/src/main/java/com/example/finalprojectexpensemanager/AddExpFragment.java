@@ -13,11 +13,9 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-
 import com.example.finalprojectexpensemanager.Entity.ExpenseTable;
 import com.example.finalprojectexpensemanager.Repository.ExpenseRepository;
 import com.google.android.material.button.MaterialButton;
@@ -137,7 +135,7 @@ public class AddExpFragment extends Fragment {
         String dateText = date.getText().toString();
         String categoryData = category;
         if (nameText.trim().isEmpty() || descText.trim().isEmpty() || amountText.trim().isEmpty() || dateText.trim().isEmpty() || !isSelected) {
-            Toast.makeText(getContext(), "Please fill all the fields", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Please Fill All The Fields", Toast.LENGTH_SHORT).show();
             return;
         }
     try {

@@ -216,7 +216,7 @@
                 android:text="Utilities"
                 app:checkedIconEnabled="false"
                 app:chipBackgroundColor="@color/chip_bg_states"
-                app:chipIcon="@drawable/img_black_Utilities"
+                app:chipIcon="@drawable/img_black_utilities"
                 app:chipIconVisible="true"
                 tools:textColor="@android:color/white" />
 
@@ -240,7 +240,7 @@
                 android:text="Health"
                 app:checkedIconEnabled="false"
                 app:chipBackgroundColor="@color/chip_bg_states"
-                app:chipIcon="@drawable/img_black_Health"
+                app:chipIcon="@drawable/img_black_health"
                 app:chipIconVisible="true"
                 tools:textColor="@android:color/white" />
 

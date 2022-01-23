@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.finalprojectexpensemanager.Entity.ExpenseTable;
+import com.example.finalprojectexpensemanager.Repository.ExpenseRepository;
 
 public class AllTransactionAdapter extends RecyclerView.Adapter<AllTransactionAdapter.ExpenseHolder> {
     private List<ExpenseTable> expenses = new ArrayList<>();
@@ -29,7 +30,7 @@ public class AllTransactionAdapter extends RecyclerView.Adapter<AllTransactionAd
         ExpenseTable expenseTable = expenses.get(position);
         holder.expenseName.setText(expenseTable.getExpenseName());
         holder.desc.setText(expenseTable.getDescription());
-        holder.amount.setText(expenseTable.getAmount());
+        holder.amount.setText(expenseTable.getAmount()+ ExpenseRepository.coin);
         holder.date.setText(expenseTable.getDate());
     }
 

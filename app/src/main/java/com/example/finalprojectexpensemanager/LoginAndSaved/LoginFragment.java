@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import com.example.finalprojectexpensemanager.Repository.ExpenseRepository;
@@ -47,12 +46,12 @@ public class LoginFragment extends Fragment implements AdapterView.OnItemSelecte
 
                 if (personName.isEmpty()) {
                     continueButton.setEnabled(false);
-                    PersonName.setError("This field cannot be empty");
+                    PersonName.setError("This Field Cannot Be Empty");
                 }
 
                 if (personBudget.isEmpty()) {
                     continueButton.setEnabled(false);
-                    PersonBudget.setError("This field cannot be empty");
+                    PersonBudget.setError("This Field Cannot Be Empty");
 
                 }
                 if(!personBudget.isEmpty()) {
