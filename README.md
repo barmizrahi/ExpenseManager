@@ -14,9 +14,9 @@
 
 
   ## Main Screen
-    <p align="center">
-      <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.37.05.jpeg" width="350" title="hover text">
-    </p>
+     <p align="center">
+    <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.36.15.jpeg" width="350" title="hover text">
+ </p>
 
   ## Add Expense Screen
     <p align="center">
