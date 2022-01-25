@@ -26,7 +26,6 @@ public class LoginFragment extends Fragment implements AdapterView.OnItemSelecte
         private TextInputLayout PersonBudget;
         private TextInputLayout PersonIncome;
         private Button continueButton;
-        private Activity activity;
         private View view;
         private Spinner spinner;
         private ImageView info;
@@ -82,8 +81,7 @@ public class LoginFragment extends Fragment implements AdapterView.OnItemSelecte
         }
 
         public View onCreateView( LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
-            activity = this.getActivity();
-            activity.setTitle("Personal Details");
+            this.getActivity().setTitle("Personal Details");
             view = inflater.inflate(R.layout.fragment_login, container, false);
             initView(view);
             ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(container.getContext(),
