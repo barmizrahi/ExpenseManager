@@ -1,6 +1,9 @@
 # Expense Manager
  An Application for Android which designed to track and limit the expenses
-
+<p align="center">
+  <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.35.44.jpeg" width="350" title="hover text">
+  <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.35.56.jpeg" width="350" alt="accessibility text">
+</p>
 
   ## Login And Register Using Firebase
 ![this is an image](https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.35.44.jpeg) ![this is an image](https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.35.56.jpeg) 
