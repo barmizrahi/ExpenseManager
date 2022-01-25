@@ -8,17 +8,26 @@
 </p>
 
   ## Create New Profile
-  ![this is an image](https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.36.15.jpeg)
+  <p align="left">
+  <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.36.15.jpeg" width="350" title="hover text">
+</p>
+
 
   ## Main Screen
-  
- ![this is an image](https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.37.05.jpeg)
+    <p align="left">
+  <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.37.05.jpeg" width="350" title="hover text">
+</p>
 
   ## Add Expense Screen
- ![this is an image](https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.36.28.jpeg)
+    <p align="left">
+  <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.36.28.jpeg" width="350" title="hover text">
+</p>
 
   ## View All Expenses Screen
- ![this is an image](https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.43.49.jpeg)
+    <p align="left">
+  <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.43.49.jpeg" width="350" title="hover text">
+</p>
+
 
   ## View Expenses By category Screen
   <p align="center">
