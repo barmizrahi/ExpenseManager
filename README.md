@@ -25,9 +25,9 @@
  </p>
 
   ## View All Expenses Screen
-    <p align="center">
-      <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.43.49.jpeg" width="350" title="hover text">
-    </p>
+  <p align="center">
+    <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.43.49.jpeg" width="350" title="hover text">
+ </p>
 
 
   ## View Expenses By category Screen
