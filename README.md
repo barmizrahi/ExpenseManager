@@ -8,23 +8,23 @@
 </p>
 
   ## Create New Profile
-  <p align="left">
+  <p align="center">
   <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.36.15.jpeg" width="350" title="hover text">
 </p>
 
 
   ## Main Screen
-    <p align="left">
+    <p align="center">
   <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.37.05.jpeg" width="350" title="hover text">
 </p>
 
   ## Add Expense Screen
-    <p align="left">
+    <p align="center">
   <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.36.28.jpeg" width="350" title="hover text">
 </p>
 
   ## View All Expenses Screen
-    <p align="left">
+    <p align="center">
   <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.43.49.jpeg" width="350" title="hover text">
 </p>
 
