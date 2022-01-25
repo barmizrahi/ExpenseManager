@@ -33,7 +33,7 @@
     <string name="TAG">GoogleActivity</string>
     <string name="LogInBolean">LOG_IN</string>
     <string name="UserName">USER_NAME</string>
-    <string name="infoLogIn">1)Enter Your Name.\n\n2)Enter Your Budget (It Can Be Monthly, Weekly, Annual).\n\n3)Enter Your Income.\n\n4)Select The Type Of Currency You Are Using\n(NIS-₪ / Dollar-$ / Euro-€).
+    <string name="infoLogIn">1) Enter Your Name.\n\n2) Enter Your Budget (It Can Be Monthly, Weekly, Annual).\n\n3) Enter Your Income.\n\n4) Select The Type Of Currency You Are Using\n(NIS-₪ / Dollar-$ / Euro-€).
     </string>
     <string name="infoMain">* Press On The + Button To Add Expense.\n\n* Press On The Four Squares In The Middle In Order To View The Expenses By Category.\n\n* Press On The Refresh Button To Reset Your Net Balance.\n\n* Press On The Exit Button To Exit From Your Account.
     </string>

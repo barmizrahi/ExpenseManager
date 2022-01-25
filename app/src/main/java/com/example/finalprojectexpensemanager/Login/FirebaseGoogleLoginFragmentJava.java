@@ -86,7 +86,6 @@ public class FirebaseGoogleLoginFragmentJava extends Fragment {
         Context context = container.getContext();
 
         view = inflater.inflate(R.layout.fragment_firebase_google_login, container, false);
-
         activity = this.getActivity();
         buttonxyz = view.findViewById(R.id.buttonxyz);
         sign_in_button = view.findViewById(R.id.sign_in_button);
@@ -143,7 +142,6 @@ public class FirebaseGoogleLoginFragmentJava extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         String logIn = MSPV3.getMe().getString(getString(R.string.LogInBolean), "");
-
         if(logIn.equals("true")){
             ExpenseRepository.userName = MSPV3.getMe().getString(getString(R.string.UserName), "");
             FirebaseDatabase database = FirebaseDatabase.getInstance();

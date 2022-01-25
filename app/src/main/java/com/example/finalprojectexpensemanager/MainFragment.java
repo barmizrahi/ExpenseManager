@@ -60,6 +60,8 @@ public class MainFragment extends Fragment {
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        MSPV3.getMe().putString(getString(R.string.UserName), ExpenseRepository.userName);
+        MSPV3.getMe().putString(getString(R.string.LogInBolean), "true");
         Context context = container.getContext();
         view = inflater.inflate(R.layout.fragment_main, container, false);
         initView(view);

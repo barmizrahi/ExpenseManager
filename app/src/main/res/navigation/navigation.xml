@@ -151,7 +151,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentInfoLogIn"
-        android:name="com.example.finalprojectexpensemanager.InfoFragmentLogIn"
+        android:name="com.example.finalprojectexpensemanager.fragmentInfoLogIn"
         android:label="fragment_info_logIn"
         tools:layout="@layout/fragment_info_log_in">
         <action

@@ -22,6 +22,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,6 +34,7 @@ import java.util.Calendar;
 public class AddExpFragment extends Fragment {
     private TextInputEditText name;
     private TextInputEditText amount;
+    private TextInputLayout amount_input_text;
     private MaterialTextView date;
     private TextInputEditText desc;
     private MaterialTextView selectdate;
@@ -123,6 +125,7 @@ public class AddExpFragment extends Fragment {
         save = view.findViewById(R.id.addButton);
         title = view.findViewById(R.id.titleID);
         back_add = view.findViewById(R.id.back_add);
+        amount_input_text = view.findViewById(R.id.amount_input_text);
         activity.setTitle("Add Expense");
         title.setText("Add Expense");
         chipGroup = view.findViewById(R.id.categoryChipGroup);
@@ -140,12 +143,14 @@ public class AddExpFragment extends Fragment {
         }
     try {
         if (Integer.parseInt(amountText) < 0) {
-            amount.setError("Amount Can't Be Negative");
+            amount_input_text.setError("Amount Can't Be Negative");
+            //amount.setError("Amount Can't Be Negative");
             return;
         }
     }
     catch (NumberFormatException e){
-        amount.setError("Amount Need To Be A Integer");
+        amount_input_text.setError("Amount Can't Be Negative");
+        //amount.setError("Amount Need To Be A Integer");
         return;
     }
         ExpenseTable expenseTable = new ExpenseTable(nameText, amountText, dateText, descText, categoryData, ExpenseRepository.counter);

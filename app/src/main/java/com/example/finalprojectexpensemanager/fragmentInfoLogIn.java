@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-public class InfoFragmentLogIn extends Fragment {
+public class fragmentInfoLogIn extends Fragment {
     private View view;
     private TextView Tv_info;
     private ImageButton back_info;

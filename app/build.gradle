@@ -3,6 +3,7 @@ plugins {
     id 'com.google.gms.google-services'
     id 'com.google.android.secrets-gradle-plugin' version '1.1.0'
     id 'androidx.navigation.safeargs'
+    id 'com.google.firebase.crashlytics'
 
 }
 
@@ -112,8 +113,9 @@ dependencies {
 
 //    for refresh layout
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
-
+    implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-database:20.0.3'
+    implementation 'com.google.firebase:firebase-analytics'
 
 }
 }

@@ -52,7 +52,7 @@ public class MyCategoryDetalis extends Fragment  {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 getkey[0] = result.getString(getString(R.string.EXTRA_CATEGORY));
-                Toast.makeText(context, "Selected Key" + getkey[0], Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Selected Key " + getkey[0], Toast.LENGTH_SHORT).show();
                 category_view.setAdapter(adapter);
                 categoryViewModel = new ViewModelProvider(requireActivity()).get(CategoryViewModel.class);
                 if (getkey[0] == null) {
@@ -74,6 +74,7 @@ public class MyCategoryDetalis extends Fragment  {
 
     private void initView(View view) {
         this.activity = getActivity();
+        activity.setTitle("");
         backbtn = view.findViewById(R.id.back);
         category_view = view.findViewById(R.id.recycler_view3);
         totalSpendingtext = view.findViewById(R.id.totalspending);
@@ -162,6 +163,6 @@ public class MyCategoryDetalis extends Fragment  {
         for (int i = 0; i < expnsesToShowByCategory.size(); i++) {
             totalSpending = totalSpending + Float.parseFloat(expnsesToShowByCategory.get(i).getAmount());
         }
-        totalSpendingtext.setText( "Total"+ totalSpending+ExpenseRepository.coin);
+        totalSpendingtext.setText( "Total: "+ totalSpending+ExpenseRepository.coin);
     }
 }
