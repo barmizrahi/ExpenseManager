@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Application;
 import android.os.Bundle;
+import android.util.Log;
 
 public class App extends Application {
 
@@ -11,5 +12,6 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         MSPV3.initHelper(this);
+        Log.i("ptt","here");
     }
 }
