@@ -22,7 +22,7 @@
 
   ## Add Expense Screen
   <p align="left">
-    <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.36.28.jpeg" width="350" title="hover text">
+    <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.36.28.jpeg" width="200" title="hover text">
  </p>
 
   ## View All Expenses Screen
