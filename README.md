@@ -4,19 +4,19 @@
 
   ## Login And Register Using Firebase
 <p align="left">
-  <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.35.44.jpeg" width="350" title="hover text">
-  <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.35.56.jpeg" width="350" alt="accessibility text">
+  <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.35.44.jpeg" width="200" title="hover text">
+  <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.35.56.jpeg" width="200" alt="accessibility text">
 </p>
 
   ## Create New Profile
   <p align="left">
-    <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.36.15.jpeg" width="350" title="hover text">
+    <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.36.15.jpeg" width="200" title="hover text">
  </p>
 
 
   ## Main Screen
   <p align="left">
-    <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.37.05.jpeg" width="350" title="hover text">
+    <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.37.05.jpeg" width="200" title="hover text">
  </p>
 
 
@@ -27,14 +27,14 @@
 
   ## View All Expenses Screen
   <p align="left">
-    <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.43.49.jpeg" width="350" title="hover text">
+    <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.43.49.jpeg" width="200" title="hover text">
  </p>
 
 
   ## View Expenses By Category Screen
   <p align="left">
-    <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.36.40.jpeg" width="350" title="hover text">
-    <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.36.53.jpeg" width="350" alt="accessibility text">
+    <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.36.40.jpeg" width="200" title="hover text">
+    <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.36.53.jpeg" width="200" alt="accessibility text">
    </p>
 
 
