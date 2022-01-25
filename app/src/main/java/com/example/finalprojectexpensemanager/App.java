@@ -12,6 +12,6 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         MSPV3.initHelper(this);
-        Log.i("ptt","here");
+        Log.i("ptt","now");
     }
 }
