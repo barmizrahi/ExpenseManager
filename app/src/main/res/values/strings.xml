@@ -33,6 +33,10 @@
     <string name="TAG">GoogleActivity</string>
     <string name="LogInBolean">LOG_IN</string>
     <string name="UserName">USER_NAME</string>
+    <string name="infoLogIn">* Enter Your Name.\n\n* Enter Your Net Balance (It Can Be Monthly, Weekly, Annual).\n\n* Enter Your Income.\n\n* Select The Type Of Currency You Are Using(NIS-₪ / Dollar-$ / Euro-€).
+    </string>
+    <string name="infoMain">* Press On The + Button To Add Expense.\n\n* Press On The Four Squares In The Middle In Order To View The Expenses By Category.\n\n* Press On The Refresh Button To Reset Your Net Balance.\n\n* Press On The Exit Button To Exit From Your Account.
+    </string>
     <string-array name="coins_array">
         <item>NIS</item>
         <item>Dollar</item>

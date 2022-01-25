@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_fragment_main_to_firebaseGoogleLoginJavaFragment"
             app:destination="@id/firebaseGoogleLoginJavaFragment" />
+        <action
+            android:id="@+id/action_fragment_main_to_fragmentInfoMain"
+            app:destination="@id/fragmentInfoMain" />
     </fragment>
     <fragment
         android:id="@+id/fragment_add_expense"
@@ -48,6 +51,9 @@
         <action
             android:id="@+id/action_loginFragment_to_fragment_main"
             app:destination="@id/fragment_main" />
+        <action
+            android:id="@+id/action_loginFragment_to_fragmentInfoLogIn"
+            app:destination="@id/fragmentInfoLogIn" />
     </fragment>
 
     <fragment
@@ -131,6 +137,26 @@
             android:id="@+id/action_firebaseGoogleLoginJavaFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
 
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentInfoMain"
+        android:name="com.example.finalprojectexpensemanager.fragmentInfoMain"
+        android:label="fragment_info_main"
+        tools:layout="@layout/fragment_info_main">
+
+        <action
+            android:id="@+id/action_fragmentInfoMain_to_fragment_main"
+            app:destination="@id/fragment_main" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentInfoLogIn"
+        android:name="com.example.finalprojectexpensemanager.InfoFragmentLogIn"
+        android:label="fragment_info_logIn"
+        tools:layout="@layout/fragment_info_log_in">
+        <action
+            android:id="@+id/action_fragmentInfoLogIn_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
 </navigation>
 

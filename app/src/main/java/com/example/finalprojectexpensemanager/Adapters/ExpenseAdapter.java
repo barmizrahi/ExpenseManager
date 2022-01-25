@@ -63,9 +63,9 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseH
         notifyDataSetChanged();
     }
 
-    public ExpenseTable getPos(int position) {
-        return expenses.get(position);
-    }
+   // public ExpenseTable getPos(int position) {
+     //   return expenses.get(position);
+    //}
 
     @Override
     public int getItemCount() {

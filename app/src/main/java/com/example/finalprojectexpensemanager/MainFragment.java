@@ -56,6 +56,7 @@ public class MainFragment extends Fragment {
     private String userName;
     private RecyclerView recyclerView;
     private ImageView Iv_exit;
+    private ImageView info;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -88,17 +89,6 @@ public class MainFragment extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.action_fragment_main_to_fragmentViewAllExpense);
             }
         });
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
-                ItemTouchHelper.UP) {
-            @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-                return false;
-            }
-            @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-
-            }
-        }).attachToRecyclerView(recyclerView);
 
         //To delete all Expenses
         deleteAll.setOnClickListener(new View.OnClickListener() {
@@ -115,6 +105,13 @@ public class MainFragment extends Fragment {
             }
         });
 
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(view).navigate(R.id.action_fragment_main_to_fragmentInfoMain);
+            }
+        });
+
         initMDialog(recyclerView,adapter);
         //to set the balance to default
         img_refresh_balance.setOnClickListener(new View.OnClickListener() {
@@ -125,7 +122,12 @@ public class MainFragment extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         String helper = snapshot.getValue(String.class);
                         myRef.child(userName).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.BUDGETDB)).setValue(""+helper);
-                        amount_remaining2.setText(""+helper+ExpenseRepository.coin);
+                        if(ExpenseRepository.coin.equals("null")){
+                            amount_remaining2.setText(""+helper);
+                        }
+                        else{
+                            amount_remaining2.setText(""+helper+ExpenseRepository.coin);
+                        }
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
@@ -242,7 +244,13 @@ public class MainFragment extends Fragment {
                 String helper = snapshot.getValue(String.class);
                 cur[0] = Integer.parseInt(helper) -  Integer.parseInt(getkey[0]);
                 myRef.child(userName).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.BUDGETDB)).setValue(""+cur[0]);
-                amount_remaining2.setText(""+cur[0]+ExpenseRepository.coin);
+                if(ExpenseRepository.coin == null){
+                    amount_remaining2.setText(""+cur[0]);
+                }
+                else{
+                    amount_remaining2.setText(""+cur[0]+ExpenseRepository.coin);
+                }
+                //amount_remaining2.setText(""+cur[0]+ExpenseRepository.coin);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -280,6 +288,7 @@ public class MainFragment extends Fragment {
         deleteAll = view.findViewById(R.id.deleteAllExpense);
         Iv_exit = view.findViewById(R.id.Iv_exit);
         no_expense = view.findViewById(R.id.no_expense);
+        info = view.findViewById(R.id.info);
         transactionText = view.findViewById(R.id.transaction);
         viewAllTransaction = view.findViewById(R.id.viewAllTransaction);
         category_button = view.findViewById(R.id.category_button);

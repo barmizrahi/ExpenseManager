@@ -162,6 +162,6 @@ public class MyCategoryDetalis extends Fragment  {
         for (int i = 0; i < expnsesToShowByCategory.size(); i++) {
             totalSpending = totalSpending + Float.parseFloat(expnsesToShowByCategory.get(i).getAmount());
         }
-        totalSpendingtext.setText( ""+ totalSpending+ExpenseRepository.coin);
+        totalSpendingtext.setText( "Total"+ totalSpending+ExpenseRepository.coin);
     }
 }

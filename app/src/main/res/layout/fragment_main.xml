@@ -77,6 +77,18 @@
         app:layout_constraintTop_toTopOf="parent"
         android:background="@drawable/img_exit"></ImageView>
 
+    <ImageView
+        android:id="@+id/info"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="340dp"
+        android:src="@drawable/img_info"
+        app:layout_constraintBottom_toTopOf="@+id/textView6"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView6"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.739"></ImageView>
+
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
@@ -120,7 +132,7 @@
         android:id="@+id/category_button"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:background="@drawable/ic_category"
+        android:background="@drawable/img_categories"
         app:layout_constraintBottom_toTopOf="@+id/recycler_view"
         app:layout_constraintEnd_toStartOf="@+id/deleteAllExpense"
         app:layout_constraintHorizontal_bias="0.345"

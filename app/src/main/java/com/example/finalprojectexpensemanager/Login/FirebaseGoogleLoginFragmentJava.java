@@ -143,6 +143,7 @@ public class FirebaseGoogleLoginFragmentJava extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         String logIn = MSPV3.getMe().getString(getString(R.string.LogInBolean), "");
+
         if(logIn.equals("true")){
             ExpenseRepository.userName = MSPV3.getMe().getString(getString(R.string.UserName), "");
             FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -150,6 +151,7 @@ public class FirebaseGoogleLoginFragmentJava extends Fragment {
             editCounterAndCoin(myRef,ExpenseRepository.userName);
             Navigation.findNavController(view).navigate(R.id.action_firebaseGoogleLoginJavaFragment_to_fragmentMain);
         }
+
         (buttonxyz).setOnClickListener((View.OnClickListener) (new View.OnClickListener() {
             public final void onClick(View it) {
                 Navigation.findNavController(view).navigate(R.id.action_firebaseGoogleLoginJavaFragment_to_firebaseLoginFragment);

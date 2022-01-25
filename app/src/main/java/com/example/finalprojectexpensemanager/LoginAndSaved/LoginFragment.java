@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
@@ -28,6 +29,7 @@ public class LoginFragment extends Fragment implements AdapterView.OnItemSelecte
         private Activity activity;
         private View view;
         private Spinner spinner;
+        private ImageView info;
         private TextWatcher boardingTextWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -89,6 +91,7 @@ public class LoginFragment extends Fragment implements AdapterView.OnItemSelecte
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(adapter);
             spinner.setOnItemSelectedListener(this);
+
             return view;
         }
 
@@ -98,11 +101,18 @@ public class LoginFragment extends Fragment implements AdapterView.OnItemSelecte
         PersonIncome= view.findViewById(R.id.PersonIncome);
         continueButton = view.findViewById(R.id.continueButton);
         spinner =  (Spinner) view.findViewById(R.id.spinner);
+        info = view.findViewById(R.id.info);
 
     }
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_fragmentInfoLogIn);
+            }
+        });
             PersonName.getEditText().addTextChangedListener(boardingTextWatcher);
             PersonBudget.getEditText().addTextChangedListener(boardingTextWatcher);
             PersonIncome.getEditText().addTextChangedListener(boardingTextWatcher);
