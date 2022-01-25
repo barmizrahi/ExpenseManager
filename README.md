@@ -1,23 +1,23 @@
 # Expense Manager
-An Application for Android which designed to track and limit the expenses
+ An Application for Android which designed to track and limit the expenses
 
 
-# Login And Register Using Firebase
+  ## Login And Register Using Firebase
 
 
-# Create New Profile
+  ## Create New Profile
 
 
-# Main Screen
+  ## Main Screen
 
 
-# Add Expense Screen
+  ## Add Expense Screen
 
 
-# View All Expenses Screen
+  ## View All Expenses Screen
 
 
-# View Expenses By category Screen
+  ## View Expenses By category Screen
 
 
 # Features
