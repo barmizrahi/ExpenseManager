@@ -2,7 +2,7 @@
  An Application for Android which designed to track and limit the expenses
 
   ## Login And Register Using Firebase
-<p align="center">
+<p align="left">
   <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.35.44.jpeg" width="350" title="hover text">
   <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.35.56.jpeg" width="350" alt="accessibility text">
 </p>
@@ -38,6 +38,13 @@
 
 
 # Features
- - [x] #739
+
+ - [x]  Users are Saved in firebase Authentication and all the information loaded from Realtime Database.
+ - [x]  Login Screen and register using firebase and google auth.
+ - [x]  A User personal detail Screen to enter details such as name and budget.  
+ - [x]  Home screen displays net balance, recent expenses and lots of other useful functionality.
+ - [x]  Add new Expense Screen Allow you to add an expense by fill the name, amount, description, date and the category. 
+ - [x]  The all Expneses Screen allow you to see all your expenses order by date, you can delete expense and get his amount. In addition you can see the division by categories in the Pie Chart.
+ - [x]  Category Screen allow you to See the expenses that belong to the category you choose.
 
 
