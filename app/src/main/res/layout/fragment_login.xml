@@ -98,7 +98,7 @@
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="25dp"
-                android:hint="Nat Balance"
+                android:hint="Budget"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
