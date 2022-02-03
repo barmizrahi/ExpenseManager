@@ -28,7 +28,7 @@
   ## View All Expenses Screen
   ### Swipe Right To Delete, Left To Edit
   <p align="left">
-    <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.43.49.jpeg" width="200" title="hover text">
+    <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-02-02%20at%2021.54.32.jpeg" width="200" title="hover text">
  </p>
 
 
@@ -45,7 +45,7 @@
  - [x]  A user personal detail screen to enter details such as name And budget.  
  - [x]  Home screen displays net balance, recent expenses and lots of other useful functionality.
  - [x]  Add new expense screen allows you to add an expense by fill the name, amount, description, date and the category. 
- - [x]  The all expneses screen allows you to see all your expenses order by date. You can delete an expense and get its amount back to your net balance. In addition you can see the division by categories in the Pie Chart.
+ - [x]  The all expneses screen allows you to see all your expenses order by date. You can delete an expense by swipe right and get its amount back to your net balance, you can also swipe left to edit an expense. In addition you can see the division by categories in the Pie Chart.
  - [x]  Category screen allows you to See the expenses that belong to the category you choose.
 
 
