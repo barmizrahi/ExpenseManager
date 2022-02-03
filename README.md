@@ -26,7 +26,9 @@
  </p>
 
   ## View All Expenses Screen
-  ### Swipe Right To Delete, Left To Edit
+  <t align="left"> 
+   Swipe Right To Delete, Left To Edit
+ </t>
   <p align="left">
     <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-02-02%20at%2021.54.32.jpeg" width="200" title="hover text">
  </p>
