@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragment_main"
-        android:name="com.example.finalprojectexpensemanager.MainFragment"
+        android:name="com.example.finalprojectexpensemanager.AllFragments.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main">
         <action
@@ -32,7 +32,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_add_expense"
-        android:name="com.example.finalprojectexpensemanager.AddExpFragment"
+        android:name="com.example.finalprojectexpensemanager.AllFragments.AddExpenseFragment"
         android:label="fragment_Add_New_Exp"
         tools:layout="@layout/fragment_add_expense">
         <argument
@@ -58,16 +58,19 @@
 
     <fragment
         android:id="@+id/fragmentViewAllExpense"
-        android:name="com.example.finalprojectexpensemanager.ViewAllExpenseFragment"
+        android:name="com.example.finalprojectexpensemanager.AllFragments.ViewAllExpenseFragment"
         android:label="fragment_view_all_expense"
         tools:layout="@layout/fragment_view_all_expense">
         <action
             android:id="@+id/action_fragmentViewAllExpense_to_fragment_main"
             app:destination="@id/fragment_main" />
+        <action
+            android:id="@+id/action_fragmentViewAllExpense_to_fragment_add_expense"
+            app:destination="@id/fragment_add_expense" />
     </fragment>
     <fragment
         android:id="@+id/fragmentMyCategotyDetalis"
-        android:name="com.example.finalprojectexpensemanager.MyCategoryDetalis"
+        android:name="com.example.finalprojectexpensemanager.AllFragments.CategoryDetalisFragment"
         android:label="fragment_category_details"
         tools:layout="@layout/fragment_category_details">
         <action
@@ -79,7 +82,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_category_page"
-        android:name="com.example.finalprojectexpensemanager.CategoryPage"
+        android:name="com.example.finalprojectexpensemanager.AllFragments.CategoryPageFragment"
         android:label="fragment_category_page"
         tools:layout="@layout/fragment_category_page"
         >
@@ -141,7 +144,7 @@
 
     <fragment
         android:id="@+id/fragmentInfoMain"
-        android:name="com.example.finalprojectexpensemanager.fragmentInfoMain"
+        android:name="com.example.finalprojectexpensemanager.AllFragments.InfoMainFragment"
         android:label="fragment_info_main"
         tools:layout="@layout/fragment_info_main">
 
@@ -151,7 +154,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentInfoLogIn"
-        android:name="com.example.finalprojectexpensemanager.fragmentInfoLogIn"
+        android:name="com.example.finalprojectexpensemanager.AllFragments.InfoLogInFragment"
         android:label="fragment_info_logIn"
         tools:layout="@layout/fragment_info_log_in">
         <action

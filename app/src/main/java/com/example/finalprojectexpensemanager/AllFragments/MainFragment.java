@@ -1,4 +1,4 @@
-package com.example.finalprojectexpensemanager;
+package com.example.finalprojectexpensemanager.AllFragments;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,18 +13,22 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentResultListener;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.finalprojectexpensemanager.MSPV3;
+import com.example.finalprojectexpensemanager.R;
 import com.example.finalprojectexpensemanager.Repository.ExpenseRepository;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import com.example.finalprojectexpensemanager.Adapters.ExpenseAdapter;
 import com.example.finalprojectexpensemanager.Entity.ExpenseTable;
 import com.example.finalprojectexpensemanager.ViewModel.ExpenseViewModel;
@@ -33,13 +37,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import dev.shreyaspatil.MaterialDialog.MaterialDialog;
 import dev.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
 
 public class MainFragment extends Fragment {
     private Button category_button;
     public static ExpenseViewModel expenseViewModel;
-    private MaterialDialog mDialog;
+    private MaterialDialog mDialogDeleteAll;
     private TextView deleteAll;
     private TextView no_expense;
     private TextView transactionText;
@@ -51,7 +56,7 @@ public class MainFragment extends Fragment {
     private TextView name_text;
     private FloatingActionButton buttonAddNote;
     private View view;
-    final String[] getkey = {"0"};
+    private MaterialDialog mDialogRefresh;
     public static List<ExpenseTable> finalE;
     private String userName;
     private RecyclerView recyclerView;
@@ -73,7 +78,7 @@ public class MainFragment extends Fragment {
         //insert into amount_remaining2 a value
         editBudget(myRef);
         //insert into recyclerView some expneses
-        editLastItems(myRef,recyclerView,adapter);
+        editLastItems(myRef, recyclerView, adapter);
         recyclerView.setHasFixedSize(true);
         HorizontalLayout = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(HorizontalLayout);
@@ -96,7 +101,7 @@ public class MainFragment extends Fragment {
         deleteAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDialog.show();
+                mDialogDeleteAll.show();
             }
         });
         //Go to category page
@@ -114,57 +119,86 @@ public class MainFragment extends Fragment {
             }
         });
 
-        initMDialog(recyclerView,adapter);
+        initMDialog(recyclerView, adapter);
+        initMDialogRefresh(myRef);
         //to set the balance to default
         img_refresh_balance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myRef.child(userName).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.RESET)).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String helper = snapshot.getValue(String.class);
-                        myRef.child(userName).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.BUDGETDB)).setValue(""+helper);
-                        if(ExpenseRepository.coin.equals("null")){
-                            amount_remaining2.setText(""+helper);
-                        }
-                        else{
-                            amount_remaining2.setText(""+helper+ExpenseRepository.coin);
-                        }
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+                mDialogRefresh.show();
             }
         });
         //exit from the account
         Iv_exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MSPV3.getMe().putString("Start", "false");
                 MSPV3.getMe().putString(getString(R.string.UserName), "");
                 MSPV3.getMe().putString(getString(R.string.LogInBolean), "false");
+                ExpenseRepository.counter = 0;
                 Navigation.findNavController(view).navigate(R.id.action_fragment_main_to_firebaseGoogleLoginJavaFragment);
             }
         });
-        myRef.child(userName).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.RESET)).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ExpenseRepository.reset = Integer.parseInt(snapshot.getValue(String.class));
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+        if (MSPV3.getMe().getString("Start", "").equals("true")) {
+            myRef.child(userName).child(getString(R.string.RESET)).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    ExpenseRepository.reset = Integer.parseInt(snapshot.getValue(String.class));
+                }
 
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+            MSPV3.getMe().putString("Start", "false");
+        }
 
         return view;
     }
 
+    private void initMDialogRefresh(DatabaseReference myRef) {
+        mDialogRefresh = new MaterialDialog.Builder(activity)
+                .setTitle("Refresh?")
+                .setMessage("Are You Sure You Want To Refresh Your Balance?")
+                .setCancelable(false)
+                .setPositiveButton("Refresh", R.drawable.ic_delete, new MaterialDialog.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        myRef.child(userName).child(getString(R.string.RESET)).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                String helper = snapshot.getValue(String.class);
+                                myRef.child(userName).child(getString(R.string.BUDGETDB)).setValue("" + helper);
+                                MSPV3.getMe().putString("MPAmount", helper);
+                                ExpenseRepository.amount = Integer.parseInt(helper);
+                                if (ExpenseRepository.coin.equals("null")) {
+                                    amount_remaining2.setText("" + helper);
+                                } else {
+                                    amount_remaining2.setText("" + helper + ExpenseRepository.coin);
+                                }
+                                dialogInterface.dismiss();
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                    }
+                })
+                .setNegativeButton("Cancel", R.drawable.ic_close, new MaterialDialog.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .build();
+    }
+
     private void initMDialog(RecyclerView recyclerView, ExpenseAdapter adapter) {
-        mDialog = new MaterialDialog.Builder(activity)
+        mDialogDeleteAll = new MaterialDialog.Builder(activity)
                 .setTitle("Delete?")
-                .setMessage("Are You Sure Want To Delete All The Expenses?")
+                .setMessage("Are You Sure You Want To Delete All The Expenses?")
                 .setCancelable(false)
                 .setPositiveButton("Delete", R.drawable.ic_delete, new MaterialDialog.OnClickListener() {
                     @Override
@@ -200,35 +234,23 @@ public class MainFragment extends Fragment {
                         for (DataSnapshot child : snapshot.getChildren()) {
                             if (child.getKey().equals(userName)) {//then enter to the user now
                                 for (DataSnapshot child1 : child.getChildren()) {//expneses
-                                    for (DataSnapshot child2 : child1.getChildren()) {
-                                        for (DataSnapshot child3 : child2.getChildren()) {//items of type
-                                            try {
-                                                ExpenseTable expenseTable = child3.getValue(ExpenseTable.class);
-                                                finalE.add(expenseTable);
-                                            } catch (Exception ex) {
+                                    if (child1.getKey().equals(getString(R.string.EXPENSE_TABLE))) {
+                                        for (DataSnapshot child2 : child1.getChildren()) {
+                                            for (DataSnapshot child3 : child2.getChildren()) {//items of type
+                                                try {
+                                                    ExpenseTable expenseTable = child3.getValue(ExpenseTable.class);
+                                                    finalE.add(expenseTable);
+                                                } catch (Exception ex) {
+                                                }
                                             }
                                         }
                                     }
                                 }
                             }
                         }
-                        if (finalE.isEmpty()) {
-                            no_expense.setVisibility(View.VISIBLE);
-                            recyclerView.setVisibility(View.INVISIBLE);
-                            deleteAll.setVisibility(View.INVISIBLE);
-                            transactionText.setVisibility(View.INVISIBLE);
-                            viewAllTransaction.setVisibility(View.INVISIBLE);
-                        } else {
-                            recyclerView.setVisibility(View.VISIBLE);
-                            deleteAll.setVisibility(View.VISIBLE);
-                            transactionText.setVisibility(View.VISIBLE);
-                            no_expense.setVisibility(View.INVISIBLE);
-                            viewAllTransaction.setVisibility(View.VISIBLE);
-                        }
-                        expenseViewModel.setAllExpenses(finalE);
-                        adapter.setNotes(expenseViewModel.getAllExpense());
-                        recyclerView.setAdapter(adapter);
+                        showOrNot(finalE, adapter);
                     }
+
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 
@@ -238,31 +260,49 @@ public class MainFragment extends Fragment {
         });
     }
 
-    private void editBudget(DatabaseReference myRef) {
-        final int[] cur = new int[1];
-        myRef.child(userName).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.BUDGETDB)).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String helper = snapshot.getValue(String.class);
-                cur[0] = Integer.parseInt(helper) -  Integer.parseInt(getkey[0]);
-                myRef.child(userName).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.BUDGETDB)).setValue(""+cur[0]);
-                if(ExpenseRepository.coin == null){
-                    amount_remaining2.setText(""+cur[0]);
-                }
-                else{
-                    amount_remaining2.setText(""+cur[0]+ExpenseRepository.coin);
-                }
-                //amount_remaining2.setText(""+cur[0]+ExpenseRepository.coin);
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+    private void showOrNot(List<ExpenseTable> finalE, ExpenseAdapter adapter) {
+        if (finalE.isEmpty()) {
+            no_expense.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.INVISIBLE);
+            deleteAll.setVisibility(View.INVISIBLE);
+            transactionText.setVisibility(View.INVISIBLE);
+            viewAllTransaction.setVisibility(View.INVISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            deleteAll.setVisibility(View.VISIBLE);
+            transactionText.setVisibility(View.VISIBLE);
+            no_expense.setVisibility(View.INVISIBLE);
+            viewAllTransaction.setVisibility(View.VISIBLE);
+        }
+        expenseViewModel.setAllExpenses(finalE);
+        adapter.setNotes(expenseViewModel.getAllExpense());
+        recyclerView.setAdapter(adapter);
+    }
 
-            }
-        });
+    private void editBudget(DatabaseReference myRef) {
+        String helper = MSPV3.getMe().getString("MPAmount", "");
+        int y;
+        try {
+            y = Integer.parseInt(MSPV3.getMe().getString("newAmount", ""));
+        } catch (Exception e) {
+            y = 0;
+        }
+        MSPV3.getMe().putString("newAmount", "0");
+        int x = Integer.parseInt(helper) - y;
+        if(x<0){
+            x=0;
+        }
+        else if(x>ExpenseRepository.reset){
+            x = ExpenseRepository.reset;
+        }
+        myRef.child(userName).child(getString(R.string.BUDGETDB)).setValue("" + x);
+        MSPV3.getMe().putString("MPAmount", "" + x);
+        ExpenseRepository.amount = x;
+        amount_remaining2.setText("" + x + ExpenseRepository.coin);
     }
 
     private void editName(DatabaseReference myRef) {
-        myRef.child(userName).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.NAMEDB)).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child(userName).child(getString(R.string.NAMEDB)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 name_text.setText(snapshot.getValue(String.class));
@@ -273,13 +313,7 @@ public class MainFragment extends Fragment {
 
             }
         });
-        getParentFragmentManager().setFragmentResultListener("dataFromAddExp", this, new FragmentResultListener() {
-            @Override
-            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                getkey[0] = result.getString("Amount");
 
-            }
-        });
     }
 
     private void initView(View view) {
@@ -319,7 +353,8 @@ public class MainFragment extends Fragment {
                 return super.onOptionsItemSelected(item);
         }
     }
-    public void callParentMethod(){
+
+    public void callParentMethod() {
         activity.onBackPressed();
     }
 

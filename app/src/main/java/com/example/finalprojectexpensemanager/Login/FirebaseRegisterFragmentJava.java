@@ -82,7 +82,6 @@ public class FirebaseRegisterFragmentJava extends Fragment {
             public final void onClick(View it) {
                 firebaseEmailRegister.setError((CharSequence) null);
                 firebasePasswordRegister.setError((CharSequence) null);
-
                 String email = firebaseEmailRegister.getEditText().getText().toString();
                 String pass = firebasePasswordRegister.getEditText().getText().toString();
                 if (validateInput(email, pass)) {
@@ -90,17 +89,14 @@ public class FirebaseRegisterFragmentJava extends Fragment {
                     FirebaseRegisterFragmentJava.getAuth().createUserWithEmailAndPassword(email, pass).addOnCompleteListener((OnCompleteListener) (new OnCompleteListener() {
                         public final void onComplete(Task task) {
                             progressBar2.setVisibility(View.INVISIBLE);
+                            handleUser(email, task);
+                            /*
                             if (task.isSuccessful()) {
                                 String[] mailToDataBase = email.split("@");
                                 ExpenseRepository.userName = mailToDataBase[0];
-                                /*
-                                MSPV3.getMe().putString(getString(R.string.UserName), ExpenseRepository.userName);
-                                MSPV3.getMe().putString(getString(R.string.LogInBolean), "true");
-                                 */
                                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                                 DatabaseReference myRef = database.getReference(getString(R.string.EXPENSE_TABLE_APP));
                                 myRef.child(mailToDataBase[0]).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.EXPENSES_COUNTER)).setValue("" + 0);
-
                                 Navigation.findNavController(view).navigate(R.id.action_firebaseRegisterFragment_to_loginFragment);
                             } else {
                                 Context var3 = (Context) FirebaseRegisterFragmentJava.this.requireActivity();
@@ -110,12 +106,31 @@ public class FirebaseRegisterFragmentJava extends Fragment {
                                 toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                                 toast.show();
                             }
+                             */
 
                         }
                     }));
                 }
             }
         }));
+    }
+
+    private void handleUser(String email, Task task) {
+        if (task.isSuccessful()) {
+            String[] mailToDataBase = email.split("@");
+            ExpenseRepository.userName = mailToDataBase[0];
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myRef = database.getReference(getString(R.string.EXPENSE_TABLE_APP));
+            myRef.child(mailToDataBase[0]).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.EXPENSES_COUNTER)).setValue("" + 0);
+            Navigation.findNavController(view).navigate(R.id.action_firebaseRegisterFragment_to_loginFragment);
+        } else {
+            Context var3 = (Context) FirebaseRegisterFragmentJava.this.requireActivity();
+            StringBuilder var10001 = (new StringBuilder()).append("Authentication failed: ");
+            Exception var10002 = task.getException();
+            Toast toast = Toast.makeText(var3, (CharSequence) var10001.append(var10002 != null ? var10002.getMessage() : null).toString(), Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            toast.show();
+        }
     }
 
 

@@ -1,4 +1,4 @@
-package com.example.finalprojectexpensemanager;
+package com.example.finalprojectexpensemanager.AllFragments;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
@@ -16,6 +17,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.finalprojectexpensemanager.R;
 import com.example.finalprojectexpensemanager.Repository.ExpenseRepository;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,13 +27,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.robinhood.ticker.TickerUtils;
 import com.robinhood.ticker.TickerView;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import com.example.finalprojectexpensemanager.Adapters.AllTransactionAdapter;
 import com.example.finalprojectexpensemanager.Entity.ExpenseTable;
 import com.example.finalprojectexpensemanager.ViewModel.CategoryViewModel;
 
-public class MyCategoryDetalis extends Fragment  {
+public class CategoryDetalisFragment extends Fragment {
     private RecyclerView category_view;
     private CategoryViewModel categoryViewModel;
     private float totalSpending = 0;
@@ -91,8 +96,10 @@ public class MyCategoryDetalis extends Fragment  {
                 for (DataSnapshot child : snapshot.getChildren()) {//users
                     if (child.getKey().equals(ExpenseRepository.userName)) {//if enter then in the user
                         for (DataSnapshot child1 : child.getChildren()) {//expneses
-                            for (DataSnapshot child2 : child1.getChildren()) {
-                                mySwichCase1(child2, key, expnsesToShowByCategory);
+                            if (child1.getKey().equals(getString(R.string.EXPENSE_TABLE))) {
+                                for (DataSnapshot child2 : child1.getChildren()) {
+                                    mySwichCase1(child2, key, expnsesToShowByCategory);
+                                }
                             }
                         }
                     }
@@ -133,8 +140,6 @@ public class MyCategoryDetalis extends Fragment  {
                 if (child2.getKey().equals("Health")) {
                     insertIntoExpnsesToShowByCategory(child2, expnsesToShowByCategory);
                 }
-
-
                 break;
             case "Shopping":
                 categoryTitle.setText("Shopping Expenses");
@@ -163,6 +168,6 @@ public class MyCategoryDetalis extends Fragment  {
         for (int i = 0; i < expnsesToShowByCategory.size(); i++) {
             totalSpending = totalSpending + Float.parseFloat(expnsesToShowByCategory.get(i).getAmount());
         }
-        totalSpendingtext.setText( "Total: "+ totalSpending+ExpenseRepository.coin);
+        totalSpendingtext.setText("Total: " + totalSpending + ExpenseRepository.coin);
     }
 }

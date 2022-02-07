@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layoutDirection="ltr"
+    tools:context="com.example.finalprojectexpensemanager.AllFragments.CategoryPageFragment"
     >
 
     <LinearLayout
         android:orientation="vertical"
-        android:background="@drawable/bg4"
+        android:background="@drawable/backGround"
         android:weightSum="10"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

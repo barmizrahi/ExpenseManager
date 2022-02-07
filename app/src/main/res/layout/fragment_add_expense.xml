@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg4"
+    android:background="@drawable/backGround"
     android:orientation="vertical"
     android:padding="16dp"
     android:layoutDirection="ltr"
-    tools:context="com.example.finalprojectexpensemanager.AddExpFragment">
+    tools:context="com.example.finalprojectexpensemanager.AllFragments.AddExpenseFragment">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -105,7 +105,7 @@
                 android:id="@+id/description_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Description"
+                android:hint="Description (Optional)"
 
                 android:nextFocusDown="@id/categoryChipGroup"
                 android:singleLine="true"

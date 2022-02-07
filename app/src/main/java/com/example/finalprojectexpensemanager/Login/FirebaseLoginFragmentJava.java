@@ -10,9 +10,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+
 import com.example.finalprojectexpensemanager.MSPV3;
 import com.example.finalprojectexpensemanager.Repository.ExpenseRepository;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -92,18 +94,16 @@ public class FirebaseLoginFragmentJava extends Fragment {
                     progressBar.setVisibility(View.VISIBLE);
                     String[] mailToDataBase = email.split("@");
                     ExpenseRepository.userName = mailToDataBase[0];
-                    /*
-                    MSPV3.getMe().putString(getString(R.string.UserName), ExpenseRepository.userName);
-                    MSPV3.getMe().putString(getString(R.string.LogInBolean), "true");
-                     */
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference(getString(R.string.EXPENSE_TABLE_APP));
-                    editCounterAndCoin(myRef,mailToDataBase);
+                    editCounterAndCoin(myRef, mailToDataBase);
                     getAuth().signInWithEmailAndPassword(email, pass).addOnCompleteListener((OnCompleteListener) (new OnCompleteListener() {
                         public final void onComplete(Task task) {
                             progressBar.setVisibility(View.INVISIBLE);
                             if (task.isSuccessful()) {
+                                MSPV3.getMe().putString("Start", "true");
                                 Navigation.findNavController(view).navigate(R.id.action_firebaseLoginJavaFragment_to_fragment_main);
+                                // Navigation.findNavController(view).navigate(R.id.action_firebaseLoginJavaFragment_to_fragment_main);
                             } else {
                                 Context var3 = (Context) FirebaseLoginFragmentJava.this.requireActivity();
                                 StringBuilder var10001 = (new StringBuilder()).append("Authentication failed: ");
@@ -112,7 +112,6 @@ public class FirebaseLoginFragmentJava extends Fragment {
                                 toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                                 toast.show();
                             }
-
                         }
                     }));
                 }
@@ -129,15 +128,7 @@ public class FirebaseLoginFragmentJava extends Fragment {
                     for (DataSnapshot child : snapshot.getChildren()) {//users
                         if (child.getKey().equals(mailToDataBase[0])) {//if enter then in the user
                             for (DataSnapshot child1 : child.getChildren()) {//expneses
-                                for (DataSnapshot child2 : child1.getChildren()) {//all keys until we arrive to counter
-                                    if (child2.getKey().equals(getString(R.string.EXPENSES_COUNTER))) {
-                                        ExpenseRepository.counter = Integer.parseInt(child2.getValue(String.class));
-                                        isCounterChange = true;
-                                    }
-                                    if(child2.getKey().equals(getString(R.string.COIN))){
-                                        ExpenseRepository.coin = child2.getValue(String.class);
-                                    }
-                                }
+                                handleDataFromDataBase(child1);
                             }
                             break;
                         }
@@ -147,17 +138,39 @@ public class FirebaseLoginFragmentJava extends Fragment {
                     if (isCounterChange == false) {
                         myRef.child(mailToDataBase[0]).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.EXPENSES_COUNTER)).setValue("" + 0);
                     }
+                    //Navigation.findNavController(view).navigate(R.id.action_firebaseLoginJavaFragment_to_fragment_main);
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-
 
                 }
             });
 
         } catch (Exception e) {
             myRef.child(mailToDataBase[0]).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.EXPENSES_COUNTER)).setValue("" + 0);
+        }
+    }
+
+    private void handleDataFromDataBase(DataSnapshot child1) {
+        if (child1.getKey().equals(getString(R.string.EXPENSE_TABLE))) {
+            for (DataSnapshot child2 : child1.getChildren()) {//all keys until we arrive to counter
+                if (child2.getKey().equals(getString(R.string.EXPENSES_COUNTER))) {
+                    ExpenseRepository.counter = Integer.parseInt(child2.getValue(String.class));
+                    MSPV3.getMe().putString("MPCounter", child2.getValue(String.class));
+                    // also insert into MPV3
+                    isCounterChange = true;
+                }
+
+            }
+        } else if (child1.getKey().equals(getString(R.string.COIN))) {
+            ExpenseRepository.coin = child1.getValue(String.class);
+            MSPV3.getMe().putString("MPCoin", child1.getValue(String.class));
+            // also insert into MPV3
+        } else if (child1.getKey().equals(getString(R.string.BUDGETDB))) {
+            //pull from MPV3
+            ExpenseRepository.amount = Integer.parseInt(child1.getValue(String.class));
+            MSPV3.getMe().putString("MPAmount", "" + ExpenseRepository.amount);
         }
     }
 

@@ -1,4 +1,4 @@
-package com.example.finalprojectexpensemanager;
+package com.example.finalprojectexpensemanager.AllFragments;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,11 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-public class CategoryPage extends Fragment {
+import com.example.finalprojectexpensemanager.R;
+
+public class CategoryPageFragment extends Fragment {
     private CardView food_Cat, travel_cat, utilities_cat, health_cat, shopping_cat, others_cat;
     private Context context;
     private View view;

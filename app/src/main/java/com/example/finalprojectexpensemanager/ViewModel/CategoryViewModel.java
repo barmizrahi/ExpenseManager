@@ -1,9 +1,12 @@
 package com.example.finalprojectexpensemanager.ViewModel;
 
 import android.app.Application;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+
 import java.util.List;
+
 import com.example.finalprojectexpensemanager.Entity.ExpenseTable;
 import com.example.finalprojectexpensemanager.Repository.ExpenseRepository;
 
@@ -47,7 +50,7 @@ public class CategoryViewModel extends AndroidViewModel {
         return OthersExpenses;
     }
 
-    public List<ExpenseTable> getFoodExpenses(){
+    public List<ExpenseTable> getFoodExpenses() {
         return FoodExpenses;
     }
 

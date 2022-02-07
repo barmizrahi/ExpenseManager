@@ -3,6 +3,9 @@ package com.example.finalprojectexpensemanager;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.example.finalprojectexpensemanager.Entity.ExpenseTable;
+import com.google.gson.Gson;
+
 public class MSPV3 {
 
     private final String SP_FILE = "SP_FILE";
@@ -47,5 +50,23 @@ public class MSPV3 {
 
     public void putString(String KEY, String value) {
         sharedPreferences.edit().putString(KEY, value).apply();
+    }
+
+    public void putObject(String KEY, ExpenseTable value) {
+        sharedPreferences.edit().putString(KEY, new Gson().toJson(value)).apply();
+    }
+
+    public ExpenseTable getObject(String KEY) {
+        ExpenseTable object = null;
+        try {
+            object = (ExpenseTable)new Gson().fromJson(sharedPreferences.getString(KEY, ""), ExpenseTable.class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return object;
+    }
+
+    public void remove(String key){
+        sharedPreferences.edit().remove(key).apply();
     }
 }

@@ -4,9 +4,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.finalprojectexpensemanager.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +33,7 @@ public class AllTransactionAdapter extends RecyclerView.Adapter<AllTransactionAd
         ExpenseTable expenseTable = expenses.get(position);
         holder.expenseName.setText(expenseTable.getExpenseName());
         holder.desc.setText(expenseTable.getDescription());
-        holder.amount.setText(expenseTable.getAmount()+ ExpenseRepository.coin);
+        holder.amount.setText(expenseTable.getAmount() + ExpenseRepository.coin);
         holder.date.setText(expenseTable.getDate());
     }
 
@@ -40,9 +43,6 @@ public class AllTransactionAdapter extends RecyclerView.Adapter<AllTransactionAd
         notifyDataSetChanged();
     }
 
-    public ExpenseTable getPos(int position) {
-        return expenses.get(position);
-    }
 
     @Override
     public int getItemCount() {

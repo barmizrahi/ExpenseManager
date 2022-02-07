@@ -6,11 +6,15 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.finalprojectexpensemanager.R;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import com.example.finalprojectexpensemanager.Entity.ExpenseTable;
 
 public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseHolder> {
@@ -63,9 +67,6 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseH
         notifyDataSetChanged();
     }
 
-   // public ExpenseTable getPos(int position) {
-     //   return expenses.get(position);
-    //}
 
     @Override
     public int getItemCount() {

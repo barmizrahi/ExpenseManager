@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
+
 import com.example.finalprojectexpensemanager.MSPV3;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -46,7 +48,6 @@ public class FirebaseGoogleLoginFragmentJava extends Fragment {
     private Button buttonxyz;
     private SignInButton sign_in_button;
     private Activity activity;
-    private boolean isCounterChange;
 
 
     @Override
@@ -86,6 +87,7 @@ public class FirebaseGoogleLoginFragmentJava extends Fragment {
         Context context = container.getContext();
 
         view = inflater.inflate(R.layout.fragment_firebase_google_login, container, false);
+
         activity = this.getActivity();
         buttonxyz = view.findViewById(R.id.buttonxyz);
         sign_in_button = view.findViewById(R.id.sign_in_button);
@@ -142,13 +144,18 @@ public class FirebaseGoogleLoginFragmentJava extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         String logIn = MSPV3.getMe().getString(getString(R.string.LogInBolean), "");
-        if(logIn.equals("true")){
+
+        if (logIn.equals("true")) {
+            buttonxyz.setVisibility(View.GONE);
             ExpenseRepository.userName = MSPV3.getMe().getString(getString(R.string.UserName), "");
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference myRef = database.getReference(getString(R.string.EXPENSE_TABLE_APP));
-            editCounterAndCoin(myRef,ExpenseRepository.userName);
-            Navigation.findNavController(view).navigate(R.id.action_firebaseGoogleLoginJavaFragment_to_fragmentMain);
+            editCounterAndCoin(myRef, ExpenseRepository.userName);
+
         }
+
+
+
 
         (buttonxyz).setOnClickListener((View.OnClickListener) (new View.OnClickListener() {
             public final void onClick(View it) {
@@ -164,42 +171,38 @@ public class FirebaseGoogleLoginFragmentJava extends Fragment {
 
     private void editCounterAndCoin(DatabaseReference myRef, String mailToDataBase) {
         try {
-            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for (DataSnapshot child : snapshot.getChildren()) {//users
-                        if (child.getKey().equals(mailToDataBase)) {//if enter then in the user
-                            for (DataSnapshot child1 : child.getChildren()) {//expneses
-                                for (DataSnapshot child2 : child1.getChildren()) {//all keys until we arrive to counter
-                                    if (child2.getKey().equals(getString(R.string.EXPENSES_COUNTER))) {
-                                        ExpenseRepository.counter = Integer.parseInt(child2.getValue(String.class));
-                                        isCounterChange = true;
-                                    }
-                                    if(child2.getKey().equals(getString(R.string.COIN))){
-                                        ExpenseRepository.coin = child2.getValue(String.class);
-                                    }
-                                }
-                            }
-                            break;
-                        }
-
-                    }
-
-                    if (isCounterChange == false) {
-                        myRef.child(mailToDataBase).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.EXPENSES_COUNTER)).setValue("" + 0);
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-
-                }
-            });
-
+            ExpenseRepository.counter = Integer.parseInt(MSPV3.getMe().getString("MPCounter", ""));
         } catch (Exception e) {
             myRef.child(mailToDataBase).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.EXPENSES_COUNTER)).setValue("" + 0);
+            ExpenseRepository.counter = 0;
+            MSPV3.getMe().putString("MPCounter", "0");
         }
+        ExpenseRepository.coin = MSPV3.getMe().getString("MPCoin", "");
+        ExpenseRepository.reset = Integer.parseInt(MSPV3.getMe().getString("MPReset", ""));
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot child : snapshot.getChildren()) {//users
+                    if (child.getKey().equals(mailToDataBase)) {//if enter then in the user
+                        for (DataSnapshot child1 : child.getChildren()) {//expneses
+                            if (child1.getKey().equals(getString(R.string.BUDGETDB))) {
+                                //pull from MPV3
+                                ExpenseRepository.amount = Integer.parseInt(child1.getValue(String.class));
+                                MSPV3.getMe().putString("MPAmount", "" + ExpenseRepository.amount);
+                            }
+                        }
+                    }
+
+                }
+                Navigation.findNavController(view).navigate(R.id.action_firebaseGoogleLoginJavaFragment_to_fragmentMain);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+
+            }
+        });
     }
 
 }

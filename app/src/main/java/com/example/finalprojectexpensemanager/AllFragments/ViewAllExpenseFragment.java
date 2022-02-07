@@ -1,4 +1,4 @@
-package com.example.finalprojectexpensemanager;
+package com.example.finalprojectexpensemanager.AllFragments;
 
 import android.app.Activity;
 import android.content.Context;
@@ -24,6 +24,8 @@ import java.util.List;
 
 import com.example.finalprojectexpensemanager.Adapters.AllTransactionAdapter;
 import com.example.finalprojectexpensemanager.Entity.ExpenseTable;
+import com.example.finalprojectexpensemanager.MSPV3;
+import com.example.finalprojectexpensemanager.R;
 import com.example.finalprojectexpensemanager.Repository.ExpenseRepository;
 import com.example.finalprojectexpensemanager.ViewModel.AllExpenseViewModel;
 import com.github.mikephil.charting.animation.Easing;
@@ -54,7 +56,8 @@ public class ViewAllExpenseFragment extends Fragment {
     private Context context;
     private final AllTransactionAdapter adapter = new AllTransactionAdapter();
     private PieChart pieChart;
-    private ArrayList<PieEntry> entries ;
+    private View view;
+    private ArrayList<PieEntry> entries;
     private List<ExpenseTable> ExpenseToPie;
 
     class SortByDate implements Comparator<ExpenseTable> {
@@ -67,9 +70,9 @@ public class ViewAllExpenseFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_view_all_expense, container, false);
+        view = inflater.inflate(R.layout.fragment_view_all_expense, container, false);
         context = container.getContext();
-        initVeiw(view);
+        initVeiw();
         activity = getActivity();
         activity.setTitle("All Expenses");
         addExpnesesToView();
@@ -84,7 +87,6 @@ public class ViewAllExpenseFragment extends Fragment {
                     public void onClick(DialogInterface dialogInterface, int which) {
                         refundAction(dialogInterface);
                         loadPieChartData();
-
                     }
                 })
                 .setNegativeButton("No Refund", R.drawable.ic_close, new MaterialDialog.OnClickListener() {
@@ -102,7 +104,7 @@ public class ViewAllExpenseFragment extends Fragment {
 
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
-                ItemTouchHelper.RIGHT) {
+                ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
 
 
             @Override
@@ -113,7 +115,11 @@ public class ViewAllExpenseFragment extends Fragment {
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 viewHolder1 = viewHolder;
-                mDialog.show();
+                if (direction == ItemTouchHelper.RIGHT) {
+                    mDialog.show();
+                } else if (direction == ItemTouchHelper.LEFT) {
+                    EditExpense();
+                }
 
             }
 
@@ -128,13 +134,21 @@ public class ViewAllExpenseFragment extends Fragment {
         return view;
     }
 
+    private void EditExpense() {
+        ExpenseTable e = expenseViewModel.editExpense(viewHolder1.getAdapterPosition());
+        adapter.notifyItemRemoved(viewHolder1.getAdapterPosition());
+        adapter.notifyItemRangeChanged(viewHolder1.getAdapterPosition(), ExpenseRepository.allExpenses.size());
+        viewHolder1.itemView.setVisibility(View.GONE);
+        MSPV3.getMe().putString("editExp", "true");
+        MSPV3.getMe().putObject("expense", e);
+        Navigation.findNavController(view).navigate(R.id.action_fragmentViewAllExpense_to_fragment_add_expense);
+    }
+
     private void setUpPieChart() {
         pieChart.setDrawHoleEnabled(true);
         pieChart.setUsePercentValues(true);
         pieChart.setEntryLabelTextSize(11);
         pieChart.setEntryLabelColor(Color.BLACK);
-        //pieChart.setCenterText("Spending By Category");
-        //pieChart.setCenterTextSize(24);
         pieChart.getDescription().setEnabled(false);
 
         Legend l = pieChart.getLegend();
@@ -148,7 +162,7 @@ public class ViewAllExpenseFragment extends Fragment {
     private void loadPieChartData() {
         entries = new ArrayList<>();
         ExpenseToPie = expenseViewModel.getAllExpense();
-        insetExpenses(entries,ExpenseToPie);
+        insetExpenses(entries, ExpenseToPie);
 
         ArrayList<Integer> colors = new ArrayList<>();
         for (int color : ColorTemplate.MATERIAL_COLORS) {
@@ -188,11 +202,8 @@ public class ViewAllExpenseFragment extends Fragment {
             if (ExpenseToPie.get(j).getCategory().equals(category)) {
                 counter = counter + Integer.parseInt(ExpenseToPie.get(j).getAmount());
             }
-            //else {
-            //  break;
-            //}
         }
-        if(counter!=0) {
+        if (counter != 0) {
             entries.add(new PieEntry(counter, category));
         }
     }
@@ -203,25 +214,7 @@ public class ViewAllExpenseFragment extends Fragment {
         adapter.notifyItemRangeChanged(viewHolder1.getAdapterPosition(), ExpenseRepository.allExpenses.size());
         viewHolder1.itemView.setVisibility(View.GONE);
         dialogInterface.dismiss();
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference(getString(R.string.EXPENSE_TABLE_APP));
-        myRef.child(ExpenseRepository.userName).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.BUDGETDB)).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String helper = snapshot.getValue(String.class);
-                int newAmount = Integer.parseInt(helper) + Integer.parseInt(e.getAmount());//what was in db + with refund
-                if (newAmount > ExpenseRepository.reset) {
-                    myRef.child(ExpenseRepository.userName).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.BUDGETDB)).setValue("" + ExpenseRepository.reset);
-                } else {
-                    myRef.child(ExpenseRepository.userName).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.BUDGETDB)).setValue("" + newAmount);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        MSPV3.getMe().putString("newAmount", "-" + e.getAmount());
     }
 
     private void addExpnesesToView() {
@@ -235,7 +228,7 @@ public class ViewAllExpenseFragment extends Fragment {
         }
     }
 
-    private void initVeiw(View view) {
+    private void initVeiw() {
         expenseView = view.findViewById(R.id.recycler_view2);
         back = view.findViewById(R.id.back_all);
         pieChart = view.findViewById(R.id.pie_chart);

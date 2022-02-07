@@ -1,9 +1,13 @@
 package com.example.finalprojectexpensemanager.Repository;
 
 import android.app.Application;
+
 import androidx.annotation.NonNull;
+
 import java.util.List;
+
 import com.example.finalprojectexpensemanager.Entity.ExpenseTable;
+import com.example.finalprojectexpensemanager.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -18,6 +22,7 @@ public class ExpenseRepository {
     public static String userName;
     public static String coin;
     public static int reset;
+    public static int amount;
     private List<ExpenseTable> foodExpenses;
     private List<ExpenseTable> travelExpenses;
     private List<ExpenseTable> utilitiesExpenses;
@@ -39,9 +44,11 @@ public class ExpenseRepository {
                 for (DataSnapshot child : snapshot.getChildren()) {
                     if (child.getKey().equals(userName)) {//then enter to the user now
                         for (DataSnapshot child1 : child.getChildren()) {//expneses
-                            for (DataSnapshot child2 : child1.getChildren()) {
-                                String key = child2.getKey();
-                                myswichCase(child2, key);
+                            if (child1.getKey().equals(application.getString(R.string.EXPENSE_TABLE))) {
+                                for (DataSnapshot child2 : child1.getChildren()) {
+                                    String key = child2.getKey();
+                                    myswichCase(child2, key);
+                                }
                             }
                         }
                     }
@@ -118,12 +125,8 @@ public class ExpenseRepository {
     }
 
     public void add(ExpenseTable expense, DatabaseReference myRef) {
-        myRef.child(userName).child(EXPENSE_TABLE).child(expense.getCategory()).child("" + counter).setValue(expense);
+        myRef.child(userName).child(EXPENSE_TABLE).child(expense.getCategory()).child("" + expense.getId()).setValue(expense);
         myRef.child(userName).child(EXPENSE_TABLE).child(EXPENSES_COUNTER).setValue("" + counter);
-    }
-
-    public void update(ExpenseTable expense) {
-
     }
 
 
@@ -179,4 +182,9 @@ public class ExpenseRepository {
         return e;
     }
 
+    public ExpenseTable editExpense(int adapterPosition) {
+        ExpenseTable e = allExpenses.get(adapterPosition);
+        allExpenses.remove(adapterPosition);
+        return e;
+    }
 }
