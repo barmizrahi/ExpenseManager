@@ -59,7 +59,4 @@
   - [v] Build the gradle file
   - [v] Now you can test the application on either android virtual device or your android device
   
- # video
- ![expense_manager_explain_gif](https://user-images.githubusercontent.com/62295181/152821082-a4a8c7d5-35e6-416b-8daa-8f1341ff6d45.gif)
-
 
