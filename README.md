@@ -51,10 +51,10 @@
  - [x]  Category screen allows you to See the expenses that belong to the category you choose.
 
 # Getting Started
-<t align="left"> 
    You need to have Android Studio installed on your device and create an Android Virtual Device to run full Android OS and test the application.
- </t>
-   ## Installation
+ 
+ 
+# Installation
     - [x] Clone the repository in a directory of your choice
     - [x] Open the finalProjectExpenseManager folder with Android Studio
     - [x] Build the gradle file
