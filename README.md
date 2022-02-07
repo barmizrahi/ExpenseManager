@@ -50,4 +50,14 @@
  - [x]  The all expneses screen allows you to see all your expenses order by date. You can delete an expense by swipe right and get its amount back to your net balance, you can also swipe left to edit an expense. In addition you can see the division by categories in the Pie Chart.
  - [x]  Category screen allows you to See the expenses that belong to the category you choose.
 
-
+# Getting Started
+<t align="left"> 
+   You need to have Android Studio installed on your device and create an Android Virtual Device to run full Android OS and test the application.
+ </t>
+  ## Installation
+    -[.] Clone the repository in a directory of your choice
+    -[.] Open the finalProjectExpenseManager folder with Android Studio
+    -[.] Build the gradle file
+    -[.] Now you can test the application on either android virtual device or your android device
+  
+  
