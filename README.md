@@ -26,9 +26,8 @@
  </p>
 
   ## View All Expenses Screen
-  <t align="left"> 
+
    Swipe Right To Delete, Left To Edit
- </t>
   <p align="left">
     <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/images/all%20expenses.jpeg" width="200" title="hover text">
  </p>
@@ -61,5 +60,4 @@
   - [v] Now you can test the application on either android virtual device or your android device
   
  # video
- 
     <iframe src="https://www.youtube.com/embed/ZmFPu_dvVN0" width="560" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
