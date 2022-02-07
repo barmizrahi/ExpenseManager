@@ -54,10 +54,10 @@
 <t align="left"> 
    You need to have Android Studio installed on your device and create an Android Virtual Device to run full Android OS and test the application.
  </t>
-  ## Installation
-    -[.] Clone the repository in a directory of your choice
-    -[.] Open the finalProjectExpenseManager folder with Android Studio
-    -[.] Build the gradle file
-    -[.] Now you can test the application on either android virtual device or your android device
+   ## Installation
+    -[v] Clone the repository in a directory of your choice
+    -[v] Open the finalProjectExpenseManager folder with Android Studio
+    -[v] Build the gradle file
+    -[v] Now you can test the application on either android virtual device or your android device
   
   
