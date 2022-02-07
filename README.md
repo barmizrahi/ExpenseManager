@@ -4,25 +4,25 @@
 
   ## Login And Register Using Firebase
 <p align="left">
-  <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.35.44.jpeg" width="200" title="hover text">
-  <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.35.56.jpeg" width="200" alt="accessibility text">
+  <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/images/start.jpeg" width="200" title="hover text">
+  <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/images/sign%20in.jpeg" width="200" alt="accessibility text">
 </p>
 
   ## Create New Profile
   <p align="left">
-    <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.36.15.jpeg" width="200" title="hover text">
+    <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/images/personal.jpeg" width="200" title="hover text">
  </p>
 
 
   ## Main Screen
   <p align="left">
-    <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.37.05.jpeg" width="200" title="hover text">
+    <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/images/main.jpeg" width="200" title="hover text">
  </p>
 
 
   ## Add Expense Screen
   <p align="left">
-    <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.36.28.jpeg" width="200" title="hover text">
+    <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/images/add%20expense.jpeg" width="200" title="hover text">
  </p>
 
   ## View All Expenses Screen
@@ -30,14 +30,14 @@
    Swipe Right To Delete, Left To Edit
  </t>
   <p align="left">
-    <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-02-02%20at%2021.54.32.jpeg" width="200" title="hover text">
+    <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/images/all%20expenses.jpeg" width="200" title="hover text">
  </p>
 
 
   ## View Expenses By Category Screen
   <p align="left">
-    <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.36.40.jpeg" width="200" title="hover text">
-    <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/Images/WhatsApp%20Image%202022-01-25%20at%2018.36.53.jpeg" width="200" alt="accessibility text">
+    <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/images/view%20all%20catagory.jpeg" width="200" title="hover text">
+    <img src="https://github.com/barmizrahi/finalProjectExpenseManager/blob/master/images/view%20expense%20by%20catagory.jpeg" width="200" alt="accessibility text">
    </p>
 
 
