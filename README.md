@@ -54,9 +54,9 @@
  
 # Installation
 
-  - [v] Clone the repository in a directory of your choice
-  - [v] Open the finalProjectExpenseManager folder with Android Studio
-  - [v] Build the gradle file
-  - [v] Now you can test the application on either android virtual device or your android device
+  - Clone the repository in a directory of your choice
+  -Open the finalProjectExpenseManager folder with Android Studio
+  - Build the gradle file
+  - Now you can test the application on either android virtual device or your android device
   
 
