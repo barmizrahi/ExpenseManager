@@ -154,9 +154,6 @@ public class FirebaseGoogleLoginFragmentJava extends Fragment {
 
         }
 
-
-
-
         (buttonxyz).setOnClickListener((View.OnClickListener) (new View.OnClickListener() {
             public final void onClick(View it) {
                 Navigation.findNavController(view).navigate(R.id.action_firebaseGoogleLoginJavaFragment_to_firebaseLoginFragment);

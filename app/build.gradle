@@ -118,6 +118,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
 
 }
+    namespace 'com.example.finalprojectexpensemanager'
 }
 
 dependencies {

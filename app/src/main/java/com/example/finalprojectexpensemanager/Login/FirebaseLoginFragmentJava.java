@@ -92,11 +92,12 @@ public class FirebaseLoginFragmentJava extends Fragment {
                 String pass = firebasePasswordLogin.getEditText().getText().toString();
                 if (validateInput(email, pass)) {
                     progressBar.setVisibility(View.VISIBLE);
-                    String[] mailToDataBase = email.split("@");
-                    ExpenseRepository.userName = mailToDataBase[0];
+                 //   String[] mailToDataBase = email.split("@");
+                   // ExpenseRepository.userName = mailToDataBase[0];
+                    ExpenseRepository.userName = email;
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference(getString(R.string.EXPENSE_TABLE_APP));
-                    editCounterAndCoin(myRef, mailToDataBase);
+                    editCounterAndCoin(myRef, email);
                     getAuth().signInWithEmailAndPassword(email, pass).addOnCompleteListener((OnCompleteListener) (new OnCompleteListener() {
                         public final void onComplete(Task task) {
                             progressBar.setVisibility(View.INVISIBLE);
@@ -120,13 +121,13 @@ public class FirebaseLoginFragmentJava extends Fragment {
         }));
     }
 
-    private void editCounterAndCoin(DatabaseReference myRef, String[] mailToDataBase) {
+    private void editCounterAndCoin(DatabaseReference myRef, String mailToDataBase) {
         try {
             myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     for (DataSnapshot child : snapshot.getChildren()) {//users
-                        if (child.getKey().equals(mailToDataBase[0])) {//if enter then in the user
+                        if (child.getKey().equals(mailToDataBase)) {//if enter then in the user
                             for (DataSnapshot child1 : child.getChildren()) {//expneses
                                 handleDataFromDataBase(child1);
                             }
@@ -136,7 +137,7 @@ public class FirebaseLoginFragmentJava extends Fragment {
                     }
 
                     if (isCounterChange == false) {
-                        myRef.child(mailToDataBase[0]).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.EXPENSES_COUNTER)).setValue("" + 0);
+                        myRef.child(mailToDataBase).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.EXPENSES_COUNTER)).setValue("" + 0);
                     }
                     //Navigation.findNavController(view).navigate(R.id.action_firebaseLoginJavaFragment_to_fragment_main);
                 }
@@ -148,7 +149,7 @@ public class FirebaseLoginFragmentJava extends Fragment {
             });
 
         } catch (Exception e) {
-            myRef.child(mailToDataBase[0]).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.EXPENSES_COUNTER)).setValue("" + 0);
+            myRef.child(mailToDataBase).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.EXPENSES_COUNTER)).setValue("" + 0);
         }
     }
 

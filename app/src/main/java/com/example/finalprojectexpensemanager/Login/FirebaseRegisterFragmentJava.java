@@ -117,11 +117,11 @@ public class FirebaseRegisterFragmentJava extends Fragment {
 
     private void handleUser(String email, Task task) {
         if (task.isSuccessful()) {
-            String[] mailToDataBase = email.split("@");
-            ExpenseRepository.userName = mailToDataBase[0];
+            //String[] mailToDataBase = email.split("@");
+            ExpenseRepository.userName = email;
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference myRef = database.getReference(getString(R.string.EXPENSE_TABLE_APP));
-            myRef.child(mailToDataBase[0]).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.EXPENSES_COUNTER)).setValue("" + 0);
+            myRef.child(email).child(getString(R.string.EXPENSE_TABLE)).child(getString(R.string.EXPENSES_COUNTER)).setValue("" + 0);
             Navigation.findNavController(view).navigate(R.id.action_firebaseRegisterFragment_to_loginFragment);
         } else {
             Context var3 = (Context) FirebaseRegisterFragmentJava.this.requireActivity();
