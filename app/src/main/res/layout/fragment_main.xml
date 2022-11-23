@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layoutDirection="ltr"
-    android:background="@drawable/main_backGround"
+    android:background="@drawable/main_back_ground"
     tools:context="com.example.finalprojectexpensemanager.AllFragments.MainFragment">
 
     <androidx.cardview.widget.CardView
@@ -115,10 +115,10 @@
         app:layout_constraintTop_toTopOf="@+id/textView6" />
 
     <TextView
-        android:id="@+id/transaction"
+        android:id="@+id/ExportData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Recent Expenses"
+        android:text="Export Data"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/recycler_view"
@@ -136,7 +136,7 @@
         app:layout_constraintBottom_toTopOf="@+id/recycler_view"
         app:layout_constraintEnd_toStartOf="@+id/deleteAllExpense"
         app:layout_constraintHorizontal_bias="0.345"
-        app:layout_constraintStart_toEndOf="@+id/transaction"
+        app:layout_constraintStart_toEndOf="@+id/ExportData"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.798" />
 
@@ -163,7 +163,7 @@
         app:layout_constraintBottom_toTopOf="@+id/recycler_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.923"
-        app:layout_constraintStart_toEndOf="@+id/transaction"
+        app:layout_constraintStart_toEndOf="@+id/ExportData"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.779" />
 

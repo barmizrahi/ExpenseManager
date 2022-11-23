@@ -118,6 +118,7 @@ public class FirebaseRegisterFragmentJava extends Fragment {
     private void handleUser(String email, Task task) {
         if (task.isSuccessful()) {
             //String[] mailToDataBase = email.split("@");
+            email = email.replaceAll("\\."," ");
             ExpenseRepository.userName = email;
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference myRef = database.getReference(getString(R.string.EXPENSE_TABLE_APP));

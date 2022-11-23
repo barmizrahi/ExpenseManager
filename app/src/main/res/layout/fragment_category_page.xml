@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:background="@drawable/backGround"
+        android:background="@drawable/back_ground"
         android:weightSum="10"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

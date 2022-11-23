@@ -89,22 +89,22 @@ public class FirebaseLoginFragmentJava extends Fragment {
                 firebaseEmailLogin.setError((CharSequence) null);
                 firebasePasswordLogin.setError((CharSequence) null);
                 String email = firebaseEmailLogin.getEditText().getText().toString();
+                String e1 = email.replaceAll("\\."," ");
                 String pass = firebasePasswordLogin.getEditText().getText().toString();
-                if (validateInput(email, pass)) {
+                if (validateInput(e1, pass)) {
                     progressBar.setVisibility(View.VISIBLE);
-                 //   String[] mailToDataBase = email.split("@");
-                   // ExpenseRepository.userName = mailToDataBase[0];
-                    ExpenseRepository.userName = email;
+                    //if(paid)
+                     //ExpenseRepository.PaidForExport = true;
+                    ExpenseRepository.userName = e1;
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference(getString(R.string.EXPENSE_TABLE_APP));
-                    editCounterAndCoin(myRef, email);
+                    editCounterAndCoin(myRef, e1);
                     getAuth().signInWithEmailAndPassword(email, pass).addOnCompleteListener((OnCompleteListener) (new OnCompleteListener() {
                         public final void onComplete(Task task) {
                             progressBar.setVisibility(View.INVISIBLE);
                             if (task.isSuccessful()) {
                                 MSPV3.getMe().putString("Start", "true");
                                 Navigation.findNavController(view).navigate(R.id.action_firebaseLoginJavaFragment_to_fragment_main);
-                                // Navigation.findNavController(view).navigate(R.id.action_firebaseLoginJavaFragment_to_fragment_main);
                             } else {
                                 Context var3 = (Context) FirebaseLoginFragmentJava.this.requireActivity();
                                 StringBuilder var10001 = (new StringBuilder()).append("Authentication failed: ");

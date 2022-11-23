@@ -13,10 +13,8 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.Toast;
-
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-
 import com.example.finalprojectexpensemanager.Entity.ExpenseTable;
 import com.example.finalprojectexpensemanager.MSPV3;
 import com.example.finalprojectexpensemanager.R;
@@ -29,7 +27,6 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.Calendar;
 
 public class AddExpenseFragment extends Fragment {
@@ -49,6 +46,7 @@ public class AddExpenseFragment extends Fragment {
     private Activity activity;
     private View view;
     private Context context;
+    private final Calendar c = Calendar.getInstance();
     public static String edit;
     private int id;
     private int eAmount = 0;
@@ -58,6 +56,7 @@ public class AddExpenseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_add_expense, container, false);
         initView();
+        setStartDate();
 
         context = container.getContext();
         selectdate.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +95,22 @@ public class AddExpenseFragment extends Fragment {
             EditExpense();
         }
         return view;
+    }
+
+    private void setStartDate() {
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        int month = c.get(Calendar.MONTH);
+        int year = c.get(Calendar.YEAR);
+        String Sday, Smonth;
+        if (day < 10) {
+            Sday = "0" + day;
+        } else
+            Sday = "" + (day);
+        if (month < 10) {
+            Smonth = "0" + (month + 1);
+        } else
+            Smonth = "" + (month + 1);
+        date.setText(year + "-" + Smonth + "-" + Sday);
     }
 
     private void EditExpense() {
@@ -138,7 +153,6 @@ public class AddExpenseFragment extends Fragment {
     }
 
     private void setDate() {
-        final Calendar c = Calendar.getInstance();
         mYear = c.get(Calendar.YEAR);
         mMonth = c.get(Calendar.MONTH);
         mDay = c.get(Calendar.DAY_OF_MONTH);
