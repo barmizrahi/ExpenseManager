@@ -26,6 +26,9 @@ import com.example.finalprojectexpensemanager.MSPV3;
 import com.example.finalprojectexpensemanager.MainActivity;
 import com.example.finalprojectexpensemanager.R;
 import com.example.finalprojectexpensemanager.Repository.ExpenseRepository;
+import com.google.android.gms.ads.AdLoader;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -83,8 +86,16 @@ public class MainFragment extends Fragment {
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         MSPV3.getMe().putString(getString(R.string.UserName), ExpenseRepository.userName);
         MSPV3.getMe().putString(getString(R.string.LogInBolean), "true");
+//        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+//            @Override
+//            public void onInitializationComplete(InitializationStatus initializationStatus) {
+//            }
+//        });
+
+
         context = container.getContext();
         view = inflater.inflate(R.layout.fragment_main, container, false);
         initView(view);

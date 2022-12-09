@@ -4,16 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back_ground"
     android:orientation="vertical"
     android:padding="16dp"
     android:layoutDirection="ltr"
     tools:context="com.example.finalprojectexpensemanager.AllFragments.AddExpenseFragment">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+        android:layout_marginLeft="25dp"
+        android:layout_weight="10"
+        android:id="@+id/AddExpAds">
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
+        tools:ignore="MissingConstraints">
+        </com.google.android.gms.ads.AdView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/addExpLay"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:background="@drawable/back_ground">
+
         <ImageButton
             android:id="@+id/back_add"
             android:layout_width="47dp"
@@ -25,77 +49,77 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.116" />
 
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/name_input_text"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
+            app:boxStrokeColor="#2EA613"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:layout_constraintVertical_bias="0.46"
-            app:boxStrokeColor="#2EA613"
-           >
+            app:layout_constraintVertical_bias="0.46">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/name_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:nextFocusDown="@id/amount_input"
+                android:hint="Expense Name"
                 android:imeOptions="actionNext"
                 android:inputType="textCapWords"
-                android:singleLine="true"
+                android:nextFocusDown="@id/amount_input"
 
-                android:hint="Expense Name" />
+                android:singleLine="true" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/amount_input_text"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:inputType="numberDecimal"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
+            android:inputType="numberDecimal"
+            app:boxStrokeColor="#2EA613"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/name_input_text"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:boxStrokeColor="#2EA613"
             app:layout_constraintVertical_bias="0.041">
 
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/amount_input"
-                android:inputType="numberDecimal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Amount"
+                android:imeOptions="actionNext"
+                android:inputType="numberDecimal"
+                android:nextFocusDown="@id/description_input"
+                android:singleLine="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/name_input_text"
-                android:nextFocusDown="@id/description_input"
-                android:imeOptions="actionNext"
-                android:singleLine="true"/>
+                app:layout_constraintTop_toBottomOf="@+id/name_input_text" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/desc_input_text"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
+            app:boxStrokeColor="#2EA613"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:boxStrokeColor="#2EA613"
 
             app:layout_constraintTop_toBottomOf="@+id/amount_input_text"
             app:layout_constraintVertical_bias="0.041">
@@ -107,9 +131,9 @@
                 android:layout_height="wrap_content"
                 android:hint="Description (Optional)"
 
+                android:inputType="textCapWords"
                 android:nextFocusDown="@id/categoryChipGroup"
                 android:singleLine="true"
-                android:inputType="textCapWords"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/amount_input_text" />
@@ -120,8 +144,8 @@
             android:id="@+id/date_input"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
             android:padding="10dp"
+            android:text=""
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -150,11 +174,11 @@
             android:id="@+id/selectDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Select Date"
             android:background="@drawable/rounded_button"
+            android:text="Select Date"
             android:textColor="@android:color/holo_red_dark"
-            android:textStyle="bold"
             android:textSize="17sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/categoryChipGroup"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.929"
@@ -232,8 +256,6 @@
                 tools:textColor="@android:color/white" />
 
 
-
-
             <com.google.android.material.chip.Chip
                 android:id="@+id/Health"
                 style="@style/CategoryChipStyle"
@@ -243,9 +265,6 @@
                 app:chipIcon="@drawable/img_black_health"
                 app:chipIconVisible="true"
                 tools:textColor="@android:color/white" />
-
-
-
 
 
             <com.google.android.material.chip.Chip

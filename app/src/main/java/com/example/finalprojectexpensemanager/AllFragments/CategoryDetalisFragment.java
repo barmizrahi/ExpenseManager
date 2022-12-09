@@ -20,6 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.finalprojectexpensemanager.R;
 import com.example.finalprojectexpensemanager.Repository.ExpenseRepository;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -50,6 +52,7 @@ public class CategoryDetalisFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_category_details, container, false);
         initView(view);
+
         Context context = container.getContext();
         totalSpendingtext.setCharacterLists(TickerUtils.provideNumberList());
         category_view.setLayoutManager(new LinearLayoutManager(context));

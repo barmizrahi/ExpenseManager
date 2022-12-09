@@ -25,7 +25,7 @@ public class CategoryPageFragment extends Fragment {
     private ImageButton categoty_back_btn;
     private Activity activity;
     private GridLayout mainGrid;
-    private boolean BuyCategoty;
+    private boolean BuyCategoty = false;
     private MaterialDialog mDidNotPurchase;
 
 

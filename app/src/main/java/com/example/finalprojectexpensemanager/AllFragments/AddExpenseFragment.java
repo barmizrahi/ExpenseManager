@@ -13,12 +13,16 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import com.example.finalprojectexpensemanager.Entity.ExpenseTable;
 import com.example.finalprojectexpensemanager.MSPV3;
 import com.example.finalprojectexpensemanager.R;
 import com.example.finalprojectexpensemanager.Repository.ExpenseRepository;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
@@ -36,6 +40,7 @@ public class AddExpenseFragment extends Fragment {
     private MaterialTextView date;
     private TextInputEditText desc;
     private MaterialTextView selectdate;
+    private androidx.constraintlayout.widget.ConstraintLayout AddExpAds;
     private MaterialTextView title;
     private MaterialButton save;
     private int mYear, mMonth, mDay;
@@ -50,6 +55,7 @@ public class AddExpenseFragment extends Fragment {
     public static String edit;
     private int id;
     private int eAmount = 0;
+    private boolean isPay = false;
 
 
     @Override
@@ -57,7 +63,12 @@ public class AddExpenseFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_add_expense, container, false);
         initView();
         setStartDate();
-
+        if(isPay){
+            AddExpAds.setVisibility(View.GONE);
+        }
+        AdView mAdView = view.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
         context = container.getContext();
         selectdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -190,6 +201,7 @@ public class AddExpenseFragment extends Fragment {
         activity.setTitle("Add Expense");
         title.setText("Add Expense");
         chipGroup = view.findViewById(R.id.categoryChipGroup);
+        AddExpAds =  view.findViewById(R.id.AddExpAds);
     }
 
     private void saveNote() {
